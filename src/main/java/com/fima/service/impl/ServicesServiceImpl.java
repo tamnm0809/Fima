@@ -16,7 +16,7 @@ public class ServicesServiceImpl implements ServicesService {
 	ServicesRepository serviceRepository;
 
 	@Override
-	public List<Services> getAll() {
+	public List<Services> getAllServices() {
 		return serviceRepository.findAll();
 	}
 

@@ -6,7 +6,7 @@ import com.fima.entity.Services;
 
 public interface ServicesService {
 
-	public List<Services> getAll();
+	public List<Services> getAllServices();
 
 	public Services addServices(Services services);
 	

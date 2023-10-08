@@ -3,6 +3,7 @@ package com.fima.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,15 +20,18 @@ import com.fima.service.ServicesService;
 @RestController
 @RequestMapping("/admin/services")
 public class ServicesAdminController {
-	
+
 	@Autowired
 	ServicesService services;
 
 	@GetMapping("/getAllServices")
-	public List<Services> getAllServices() {
-		return services.getAll();
+	public String getAllServices(Model model) {
+		List<Services> service = services.getAllServices();
+		model.addAttribute("services", service);
+		return "";
 	}
-	
+	//
+
 	@GetMapping("/getServicesById")
 	public Services getServicesById(@RequestParam("id") long id) {
 		return services.getServicesById(id);
@@ -43,8 +47,10 @@ public class ServicesAdminController {
 		return services.updateServices(id, servicesDetail);
 	}
 
-	@DeleteMapping("/delete/{id}")
-	public Boolean deleteServices(@PathVariable("id") long id) {
-		return services.deleteServices(id);
+//
+	@RequestMapping("/delete/{id}")
+	public String deleteServices(@PathVariable("id") long id) {
+		services.deleteServices(id);
+		return "";
 	}
 }
