@@ -18,7 +18,7 @@ public class CategoriesServiceImpl {
 		return categoriesRepository.findAll();
 	}
 	
-	public void deleteCategoryId(Long id) {
+	public void deleteCategories(Long id) {
 		categoriesRepository.deleteById(id);
 	}
 }

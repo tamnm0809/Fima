@@ -22,11 +22,11 @@ import com.fima.service.ServicesService;
 public class ServicesAdminController {
 
 	@Autowired
-	ServicesService services;
+	ServicesService servicesService;
 
 	@GetMapping("/getAllServices")
 	public String getAllServices(Model model) {
-		List<Services> service = services.getAllServices();
+		List<Services> service = servicesService.getAllServices();
 		model.addAttribute("services", service);
 		return "";
 	}
@@ -34,23 +34,23 @@ public class ServicesAdminController {
 
 	@GetMapping("/getServicesById")
 	public Services getServicesById(@RequestParam("id") long id) {
-		return services.getServicesById(id);
+		return servicesService.getServicesById(id);
 	}
 
 	@PostMapping("/add")
 	public Services addServices(@RequestBody Services servicesDetail) {
-		return services.addServices(servicesDetail);
+		return servicesService.addServices(servicesDetail);
 	}
 
 	@PutMapping("/update")
 	public Services updateServices(@RequestParam("id") long id, @RequestBody Services servicesDetail) {
-		return services.updateServices(id, servicesDetail);
+		return servicesService.updateServices(id, servicesDetail);
 	}
 
 //
 	@RequestMapping("/delete/{id}")
 	public String deleteServices(@PathVariable("id") long id) {
-		services.deleteServices(id);
+		servicesService.deleteServices(id);
 		return "";
 	}
 }
