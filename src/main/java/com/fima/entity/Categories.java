@@ -38,4 +38,5 @@ public class Categories implements Serializable{
 	
 	@OneToMany(mappedBy = "categories", cascade = CascadeType.ALL)
 	private Set<Services> services;
+	
 }
