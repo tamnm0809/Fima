@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.fima.entity.Categories;
+import com.fima.entity.Services;
 import com.fima.repository.CategoriesRepository;
 import com.fima.service.CategoriesService;
 
@@ -30,10 +31,10 @@ public class CategoriesServiceImpl implements CategoriesService{
 	}
 	@Override
 	public Page<Categories> getAllCategoriesPage(Integer pageNo) {
-	    int pageSize = 10;
-	    Pageable pageable = PageRequest.of(pageNo, pageSize);
-	    return categoriesRepository.findAll(pageable);
+		Pageable pageable = PageRequest.of(pageNo - 1, 5);
+		return categoriesRepository.findAll(pageable);
 	}
+	
 	@Override
 	public Categories addCategories(Categories categories) {
 		if (categories != null) {

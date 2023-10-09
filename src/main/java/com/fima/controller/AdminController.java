@@ -38,7 +38,7 @@ public class AdminController {
 		Page<Services> listPage = servicesService.getAllServicesPage(pageNo);
 		model.addAttribute("currentPage", pageNo);
 		model.addAttribute("totalPage", listPage.getTotalPages());
-		model.addAttribute("listService", listPage);
+		model.addAttribute("listService", listPage);System.out.println(listPage.getContent());
 		return "page/servicesAdmin";
 	}
 
@@ -104,12 +104,13 @@ public class AdminController {
 		model.addAttribute("currentPageCate", pageNo);
 		model.addAttribute("totalPageCate", listPage.getTotalPages());
 		model.addAttribute("listCategories", listPage);
+		System.out.println(listPage.getContent());
 		return "page/categoriesAdmin";
 	}
 	
 	@PostMapping("/categories/add")
-	public String addCategories(Model model, @RequestParam("name") String name,
-			@RequestParam("descriptions") String descriptions) {
+	public String addCategories(Model model, @RequestParam("nameCate") String name,
+			@RequestParam("descriptionsCate") String descriptions) {
 		try {
 			Categories categories = new Categories();
 			categories.setName(name);			
