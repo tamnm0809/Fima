@@ -42,11 +42,6 @@ public class ServicesServiceImpl implements ServicesService {
 	public void updateServices(Services services) {
 		serviceRepository.save(services);
 	}
-	
-	@Override
-	public void deleteById(Services services) {
-		serviceRepository.delete(services);
-	}
 
 	@Override
 	public void deleteServices(long id) {

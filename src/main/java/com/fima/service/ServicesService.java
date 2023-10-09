@@ -21,6 +21,4 @@ public interface ServicesService {
 	
 	public Optional<Services> getServicesById(long id);
 
-	public void deleteById(Services services);
-
 }
