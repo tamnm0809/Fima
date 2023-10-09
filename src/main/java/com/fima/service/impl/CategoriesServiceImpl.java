@@ -1,11 +1,15 @@
 package com.fima.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
+import com.fima.entity.Categories;
 import com.fima.repository.CategoriesRepository;
 import com.fima.service.CategoriesService;
 
@@ -17,22 +21,40 @@ public class CategoriesServiceImpl implements CategoriesService{
 	
 	public List<String> getAllCategoriesByName(){
 		return categoriesRepository.getCategoriesByName();
-=======
-import com.fima.entity.Categories;
-import com.fima.repository.CategoriesRepository;
 
-@Service
-public class CategoriesServiceImpl {
-	@Autowired
-	CategoriesRepository categoriesRepository;
-	
-	
+		
+	}
+	@Override
 	public List<Categories> getAllCategories() {
 		return categoriesRepository.findAll();
 	}
-	
-	public void deleteCategories(Long id) {
-		categoriesRepository.deleteById(id);
->>>>>>> af5eb660ac543a4043639597f5357470a68d03a4
+	@Override
+	public Page<Categories> getAllCategoriesPage(Integer pageNo) {
+	    int pageSize = 10;
+	    Pageable pageable = PageRequest.of(pageNo, pageSize);
+	    return categoriesRepository.findAll(pageable);
 	}
+	@Override
+	public Categories addCategories(Categories categories) {
+		if (categories != null) {
+			return categoriesRepository.save(categories);
+		}
+		return null;
+	}
+
+	@Override
+	public void updateCategories(Categories categories) {
+		categoriesRepository.save(categories);
+	}
+
+	@Override
+	public void deleteCategories(long id) {
+		categoriesRepository.deleteById(id);
+	}
+
+	@Override
+	public Optional<Categories> getCategoriesById(long id) {
+		return categoriesRepository.findById(id);
+	}
+	
 }
