@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap");
+
+:root {
+  --yellow-color: #f4c36c;
+  --green-color: #305349;
+  --white-color: #FFFFFF
+}
+* {
+  font-family: "Roboto Condensed";
+}
+.view .info{
+  display: flex;
+  margin-top: 20px;
+  justify-content: space-between;
+}
+.view .info ul{
+  list-style: none;
+  display: flex;
+}
+.view .info ul li a{
+  font-size: 25px;
+  padding: 20px;
+  color: var(--green-color);
+}
+.view .form .form-label,.form-control{
+  font-size: 18px;
+}
+.view .form .form-control{
+  padding: 10px 10px;
+}
+.view .form .form-select{
+  padding: 10px 10px;
+}
+.view .button-group .btn{
+  padding: 8px 20px;
+  margin: 0 20px;
+  font-weight: 500;
+  color: var(--white-color);
+  background-color: var(--green-color);
+}
+.view .button-group .btn:hover{
+  color: var(--green-color);
+  background-color: var(--white-color);
+  border: 1px solid var(--green-color);
+}
+.view .tables tr a i{
+  font-size: 20px;
+  color: var(--green-color);
+  margin: 10px;
+}
+.view .tables tr a i:hover{
+  transform: scale(1.5);
+  transition: 0.5s all;
+}
+.view .buttons_ a {
+  padding: 8px 20px;
+  margin: 0 20px;
+  font-weight: 500;
+  border-radius: 5px;
+  color: var(--white-color);
+  background-color: var(--green-color);
+}
+.buttons_{
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+.buttons_ .pagination .page-item .page-link {
+  margin: 0 5px;
+  font-size: 18px;
+  border-radius: 50%;
+  color: var(--white-color);
+  background-color: var(--green-color);
+  padding: 10px 15px;
+}
+.buttons_ .pagination .page-item .page-link:hover{
+  color: var(--green-color);
+  background-color: var(--white-color);
+  border: 1px solid var(--green-color);
+}

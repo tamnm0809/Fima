@@ -28,7 +28,7 @@ public class Services implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_services")
-	private Long id_servives;
+	private Long id_services;
 	
 	@Column(name="name", columnDefinition = "NVARCHAR(100)")
 	private String name;

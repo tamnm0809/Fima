@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.fima.entity.Services;
 
 @Repository
-public interface ServicesRepository extends JpaRepository<Services, Long>{
- 
+public interface ServicesRepository extends JpaRepository<Services, Long> {
+
 }

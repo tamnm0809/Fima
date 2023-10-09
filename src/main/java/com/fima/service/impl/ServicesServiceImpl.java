@@ -1,8 +1,12 @@
 package com.fima.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.fima.entity.Services;
@@ -16,8 +20,14 @@ public class ServicesServiceImpl implements ServicesService {
 	ServicesRepository serviceRepository;
 
 	@Override
-	public List<Services> getAll() {
+	public List<Services> getAllServices() {
 		return serviceRepository.findAll();
+	}
+
+	@Override
+	public Page<Services> getAllServicesPage(Integer pageNo) {
+		Pageable pageable = PageRequest.of(pageNo - 1, 5);
+		return serviceRepository.findAll(pageable);
 	}
 
 	@Override
@@ -29,34 +39,23 @@ public class ServicesServiceImpl implements ServicesService {
 	}
 
 	@Override
-	public Services updateServices(long id, Services services) {
-		if (services != null) {
-			Services services1 = serviceRepository.getById(id);
-			if (services1 != null) {
-				services1.setName(services.getName());
-				services1.setPrices(services.getPrices());
-				services1.setDescriptions(services.getDescriptions());
-				return serviceRepository.save(services1);
-			}
-		}
-		return null;
+	public void updateServices(Services services) {
+		serviceRepository.save(services);
+	}
+	
+	@Override
+	public void deleteById(Services services) {
+		serviceRepository.delete(services);
 	}
 
 	@Override
-	public Boolean deleteServices(long id) {
-		if (id > 1) {
-			Services services = serviceRepository.getById(id);
-			if (services != null) {
-				serviceRepository.delete(services);
-				return true;
-			}
-		}
-		return false;
+	public void deleteServices(long id) {
+		serviceRepository.deleteById(id);
 	}
 
 	@Override
-	public Services getServicesById(long id) {
-		return serviceRepository.getById(id);
+	public Optional<Services> getServicesById(long id) {
+		return serviceRepository.findById(id);
 	}
 
 }
