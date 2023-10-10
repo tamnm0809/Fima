@@ -29,6 +29,7 @@ public class CategoriesServiceImpl implements CategoriesService{
 	public List<Categories> getAllCategories() {
 		return categoriesRepository.findAll();
 	}
+
 	@Override
 	public Page<Categories> getAllCategoriesPage(Integer pageNo) {
 		Pageable pageable = PageRequest.of(pageNo - 1, 5);

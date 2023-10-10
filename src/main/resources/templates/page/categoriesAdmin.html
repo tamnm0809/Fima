@@ -5,12 +5,11 @@
 
 <head>
 <title>Quản lý loại dịch vụ</title>
-<!-- Required meta tags -->
+
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<!-- Bootstrap CSS v5.2.1 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -63,20 +62,20 @@
 				<div class="row ">
 					<div class="col-3"></div>
 					<div class="col-6 ">
-						<form action="" method="post">
+						<form action="" method="post" th:object="${categoriesEdit}" >
 							<div class="mb-3 mt-3">
 								<label for="email">Tên loại dịch vụ:</label> <input type="text"
-									class="form-control" id="" name="nameCate">
+									class="form-control" id="" name="nameCate" th:value="${categoriesEdit?.name}" >
 							</div>
 							<div class="mb-3">
 								<label for="pwd">Mô tả loại dịch vụ:</label>
-								<textarea class="form-control" rows="4" id="comment" name="descriptionsCate"></textarea>
+								<textarea class="form-control" rows="4" id="comment" th:value="${categoriesEdit?.descriptions}" name="descriptionsCate"></textarea>
 							</div>
 							<div class="mt-4">
 								<button type="submit" class="btn button me-2"
 									style="margin-left: 110px;" formaction="/admin/categories/add">Thêm</button>
 								<button type="submit" class="btn button me-2">Xóa</button>
-								<button type="submit" class="btn button me-2">Cập nhật</button>
+								<button type="submit" class="btn button me-2" formaction="/admin/categories/update">Cập nhật</button>
 							</div>
 
 						</form>
@@ -98,12 +97,13 @@
 								<td>[(${categories.id_categories})]</td>
 								<td>[(${categories.name})]</td>
 								<td>[(${categories.descriptions})]</td>
-								<td><button type="submit" class="btn button">
-										<i class="bi bi-trash"></i>
-									</button>
-									<button type="submit" class="btn button ms-2">
-										<i class="bi bi-pencil"></i></i>
-									</button></td>
+							<td><a
+									th:href="@{/admin/categories/edit(id=${categories.id_categories})}" role="button"><i
+										 class="bi bi-pencil" aria-hidden="true"></i>
+										</a> <a
+									th:href="@{'/admin/categories/delete/' + ${categories.id_categories}}"
+									role="button"><i class="fa fa-trash" aria-hidden="true"></i>
+								</a></td>
 							</tr>
 						</tbody>
 					</table>
@@ -115,8 +115,6 @@
 							<span th:text="${currentPageCate}+' of '+${totalPageCate}"
 								style="font-size: 18px"></span>
 							<ul class="pagination">
-
-
 								<li class="page-item" th:if="${currentPageCate > 1}">
 									<a class="page-link text-dark"
 									th:href="@{'?pageNo='+${currentPageCate-1}}"
@@ -142,9 +140,8 @@
 		</div>
 	</main>
 	<footer>
-		<!-- place footer here -->
 	</footer>
-	<!-- Bootstrap JavaScript Libraries -->
+
 	<script
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
 		integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
@@ -160,4 +157,4 @@
 	</script>
 </body>
 
-</html>
+</html> 

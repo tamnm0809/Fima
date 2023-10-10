@@ -123,9 +123,11 @@ public class AdminController {
 	}
 	
 	@PostMapping("/categories/update")
-	public String updateCategories(Model model, Categories categories) {
+	public String updateCategories(Model model, @RequestParam("nameCate") String name,@RequestParam("descriptionsCate") String descriptions) {	
+		Categories categories =new Categories();
+		categories.setName(name);			
+		categories.setDescriptions(descriptions);
 		categoriesService.updateCategories(categories);
-		model.addAttribute("listCategories", categoriesService.getAllCategories());
 		return "redirect:/admin/categories/getAllcategories";
 	}
 	
@@ -134,7 +136,7 @@ public class AdminController {
 			@RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo) {
 		Page<Categories> listPage = categoriesService.getAllCategoriesPage(pageNo);
 		Optional<Categories> categories = categoriesService.getCategoriesById(id);
-		model.addAttribute("listService", categoriesService.getAllCategories());
+//		model.addAttribute("listCategories", categoriesService.getAllCategories());
 		model.addAttribute("categoriesEdit", categories.orElse(new Categories()));
 		model.addAttribute("currentPageCate", pageNo);
 		model.addAttribute("totalPageCate", listPage.getTotalPages());
