@@ -23,17 +23,23 @@ import lombok.NoArgsConstructor;
 public class Categories implements Serializable{
 	
 	
-	private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
+	
+	public Categories(String name, String descriptions) {
+		super();
+		this.name = name;
+		this.descriptions = descriptions;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_categories")
 	private Long id_categories;
 	
-	@Column(name="name", columnDefinition = "NVARCHAR(50)")
+	@Column(name="name")
 	private String name;
 	
-	@Column(name="descriptions", columnDefinition = "NVARCHAR(500)")
+	@Column(name="descriptions")
 	private String descriptions;
 	
 	@OneToMany(mappedBy = "categories", cascade = CascadeType.ALL)

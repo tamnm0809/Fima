@@ -15,7 +15,7 @@ public interface ServicesService {
 
 	public Services addServices(Services services);
 	
-	public void updateServices(Services services);
+	public Services updateServices(Services services);
 	
 	public void deleteServices(long id);
 	

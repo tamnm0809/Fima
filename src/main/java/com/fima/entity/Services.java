@@ -1,6 +1,7 @@
 package com.fima.entity;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,24 +24,28 @@ import lombok.NoArgsConstructor;
 public class Services implements Serializable {
 
 	
-	private static final long serialVersionUID = 1L;
+
 	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_services")
 	private Long id_services;
 	
-	@Column(name="name", columnDefinition = "NVARCHAR(100)")
+	@Column(name="id_categories")
+	private Long id_categories;
+	
+	@Column(name="name_service")
 	private String name;
 	
-	@Column(name="prices")
-	private Double prices;
-	
-	@Column(name="descriptions", columnDefinition = "NVARCHAR(500)")
+	@Column(name="description")
 	private String descriptions;
 	
+	@Column(name="price")
+	private Double prices;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_categories")
+	@JoinColumn(name="id_categories" ,insertable = false,updatable = false)
 	private Categories categories;
 
 }

@@ -39,8 +39,8 @@ public class ServicesServiceImpl implements ServicesService {
 	}
 
 	@Override
-	public void updateServices(Services services) {
-		serviceRepository.save(services);
+	public Services updateServices(Services services) {
+		return serviceRepository.save(services);
 	}
 
 	@Override
