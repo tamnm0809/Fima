@@ -16,47 +16,47 @@ import com.fima.service.CategoriesService;
 
 @Service
 public class CategoriesServiceImpl implements CategoriesService{
-	
-	@Autowired
-	CategoriesRepository categoriesRepository;
-	
-	public List<String> getAllCategoriesByName(){
-		return categoriesRepository.getCategoriesByName();
 
-		
-	}
-	@Override
-	public List<Categories> getAllCategories() {
-		return categoriesRepository.findAll();
-	}
 
-	@Override
-	public Page<Categories> getAllCategoriesPage(Integer pageNo) {
-		Pageable pageable = PageRequest.of(pageNo - 1, 5);
-		return categoriesRepository.findAll(pageable);
-	}
-	
-	@Override
-	public Categories addCategories(Categories categories) {
-		if (categories != null) {
-			return categoriesRepository.save(categories);
-		}
-		return null;
-	}
+@Autowired
+CategoriesRepository categoriesRepository;
 
-	@Override
-	public void updateCategories(Categories categories) {
-		categoriesRepository.save(categories);
-	}
+public List<String> getAllCategoriesByName(){
+	return categoriesRepository.getCategoriesByName();
+  
+}
 
-	@Override
-	public void deleteCategories(long id) {
-		categoriesRepository.deleteById(id);
-	}
+@Override
+public List<Categories> getAllCategories() {
+	return categoriesRepository.findAll();
+}
 
-	@Override
-	public Optional<Categories> getCategoriesById(long id) {
-		return categoriesRepository.findById(id);
+@Override
+public Page<Categories> getAllCategoriesPage(Integer pageNo) {
+	Pageable pageable = PageRequest.of(pageNo - 1, 5);
+	return categoriesRepository.findAll(pageable);
+}
+
+@Override
+public Categories addCategories(Categories categories) {
+	if (categories != null) {
+		return categoriesRepository.save(categories);
 	}
-	
+	return null;
+}
+
+@Override
+public void updateCategories(Categories categories) {
+	categoriesRepository.save(categories);
+}
+
+@Override
+public void deleteCategories(Long id) {
+	categoriesRepository.deleteById(id);
+}
+
+@Override
+public Optional<Categories> getCategoriesById(Long id) {
+	return categoriesRepository.findById(id);
+}
 }

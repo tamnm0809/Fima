@@ -38,7 +38,8 @@ public class AdminController {
 		Page<Services> listPage = servicesService.getAllServicesPage(pageNo);
 		model.addAttribute("currentPage", pageNo);
 		model.addAttribute("totalPage", listPage.getTotalPages());
-		model.addAttribute("listService", listPage);System.out.println(listPage.getContent());
+		model.addAttribute("listService", listPage);
+		System.out.println(listPage.getContent());
 		return "page/servicesAdmin";
 	}
 
@@ -96,66 +97,64 @@ public class AdminController {
 		model.addAttribute("listService", listServices);
 		return "redirect:/admin/services/getAllServices";
 	}
-	
+
 	// Categories
-	@GetMapping("/categories/getAllCategories")
-	public String pageCategories(Model model, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo) {
-		Page<Categories> listPage = categoriesService.getAllCategoriesPage(pageNo);
+	@GetMapping("/categories")
+	public String getAllCategories(Model model, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo) {
+		Page<Categories> page = categoriesService.getAllCategoriesPage(pageNo);
+		model.addAttribute("listCategories", page.getContent());
 		model.addAttribute("currentPageCate", pageNo);
-		model.addAttribute("totalPageCate", listPage.getTotalPages());
-		model.addAttribute("listCategories", listPage);
-		System.out.println(listPage.getContent());
+		model.addAttribute("totalPageCate", page.getTotalPages());
 		return "page/categoriesAdmin";
-	}
-	
-	@PostMapping("/categories/add")
-	public String addCategories(Model model, @RequestParam("nameCate") String name,
-			@RequestParam("descriptionsCate") String descriptions) {
-		try {
-			Categories categories = new Categories();
-			categories.setName(name);			
-			categories.setDescriptions(descriptions);	
-			categoriesService.addCategories(categories);
-		} catch (Exception e) {	
-			System.out.println(e);
-		}
-		return "redirect:/admin/categories/getAllCategories";
-	}
-	
-	@PostMapping("/categories/update")
-	public String updateCategories(Model model, @RequestParam("nameCate") String name,@RequestParam("descriptionsCate") String descriptions) {	
-		Categories categories =new Categories();
-		categories.setName(name);			
-		categories.setDescriptions(descriptions);
-		categoriesService.updateCategories(categories);
-		return "redirect:/admin/categories/getAllcategories";
-	}
-	
-	@RequestMapping("/categories/edit")
-	public String editCategories(Model model, @RequestParam("id") long id,
-			@RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo) {
-		Page<Categories> listPage = categoriesService.getAllCategoriesPage(pageNo);
-		Optional<Categories> categories = categoriesService.getCategoriesById(id);
-//		model.addAttribute("listCategories", categoriesService.getAllCategories());
-		model.addAttribute("categoriesEdit", categories.orElse(new Categories()));
-		model.addAttribute("currentPageCate", pageNo);
-		model.addAttribute("totalPageCate", listPage.getTotalPages());
-		model.addAttribute("listCategories", listPage);
-		return "page/categoriesAdmin";
-	}
-	
-	@RequestMapping("/categories/reset")
-	public String resetCategories(Model model) {
-		return "redirect:/admin/categories/getAllCategories";
 	}
 
+	@PostMapping("/categories/add")
+	public String addCategories(@RequestParam("nameCate") String name,
+			@RequestParam("descriptionsCate") String descriptions) {
+		Categories categories = new Categories();
+		categories.setName(name);
+		categories.setDescriptions(descriptions);
+		categoriesService.addCategories(categories);
+		return "redirect:/admin/categories";
+	}
+
+	@GetMapping("/categories/edit/{id}")
+	public String editCategories(@PathVariable("id") Long id, Model model,
+			@RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo) {
+		Optional<Categories> categories = categoriesService.getCategoriesById(id);
+		if (categories.isPresent()) {
+			model.addAttribute("categoriesEdit", categories.get());
+		}
+		Page<Categories> page = categoriesService.getAllCategoriesPage(pageNo);
+		model.addAttribute("listCategories", page.getContent());
+		model.addAttribute("currentPageCate", pageNo);
+		model.addAttribute("totalPageCate", page.getTotalPages());
+		return "page/categoriesAdmin";
+	}
+
+	@PostMapping("/categories/update")
+	public String updateCategories(@RequestParam("idCate") Long id, @RequestParam("nameCate") String name,
+	        @RequestParam("descriptionsCate") String descriptions) {
+	    Optional<Categories> optionalCategories = categoriesService.getCategoriesById(id);
+	    
+	    if (optionalCategories.isPresent()) {
+	        Categories categories = optionalCategories.get();
+	        categories.setName(name);
+	        categories.setDescriptions(descriptions);
+	        categoriesService.updateCategories(categories);
+	    }  
+	    return "redirect:/admin/categories";
+	}
+	
 	@GetMapping("/categories/delete/{id}")
 	public String deleteCategories(Model model, @PathVariable("id") long id) {
 		categoriesService.deleteCategories(id);
-		List<Categories> listCategories = categoriesService.getAllCategories();
-		model.addAttribute("listCategories", listCategories);
-		return "redirect:/admin/categories/getAllCategories";
+		return "redirect:/admin/categories";
 	}
 
-	
+	@PostMapping("/categories/reset")
+	public String ResetCategories() {
+		return "redirect:/admin/categories";
+	}
+
 }
