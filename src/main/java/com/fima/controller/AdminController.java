@@ -5,14 +5,13 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -99,62 +98,27 @@ public class AdminController {
 	}
 
 	// Categories
-	@GetMapping("/categories")
-	public String getAllCategories(Model model, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo) {
-		Page<Categories> page = categoriesService.getAllCategoriesPage(pageNo);
-		model.addAttribute("listCategories", page.getContent());
-		model.addAttribute("currentPageCate", pageNo);
-		model.addAttribute("totalPageCate", page.getTotalPages());
-		return "page/categoriesAdmin";
+	@GetMapping("/services/getAllServices")
+	public String pagecategori(Model model, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo) {
+		Page<Categories> listPage = categoriesService.getAllCategoriesPage(pageNo);
+		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("totalPage", listPage.getTotalPages());
+		model.addAttribute("listcategories", listPage);
+		System.out.println(listPage.getContent());
+		return "page/categorieAdmin";
 	}
 
-	@PostMapping("/categories/add")
-	public String addCategories(@RequestParam("nameCate") String name,
-			@RequestParam("descriptionsCate") String descriptions) {
-		Categories categories = new Categories();
-		categories.setName(name);
-		categories.setDescriptions(descriptions);
-		categoriesService.addCategories(categories);
-		return "redirect:/admin/categories";
-	}
-
-	@GetMapping("/categories/edit/{id}")
-	public String editCategories(@PathVariable("id") Long id, Model model,
+	@GetMapping("/services/edit")
+	public String getCategoriesById(Model model, @RequestParam("id") long id,
 			@RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo) {
-		Optional<Categories> categories = categoriesService.getCategoriesById(id);
-		if (categories.isPresent()) {
-			model.addAttribute("categoriesEdit", categories.get());
-		}
-		Page<Categories> page = categoriesService.getAllCategoriesPage(pageNo);
-		model.addAttribute("listCategories", page.getContent());
-		model.addAttribute("currentPageCate", pageNo);
-		model.addAttribute("totalPageCate", page.getTotalPages());
-		return "page/categoriesAdmin";
-	}
-
-	@PostMapping("/categories/update")
-	public String updateCategories(@RequestParam("idCate") Long id, @RequestParam("nameCate") String name,
-	        @RequestParam("descriptionsCate") String descriptions) {
-	    Optional<Categories> optionalCategories = categoriesService.getCategoriesById(id);
-	    
-	    if (optionalCategories.isPresent()) {
-	        Categories categories = optionalCategories.get();
-	        categories.setName(name);
-	        categories.setDescriptions(descriptions);
-	        categoriesService.updateCategories(categories);
-	    }  
-	    return "redirect:/admin/categories";
-	}
-	
-	@GetMapping("/categories/delete/{id}")
-	public String deleteCategories(Model model, @PathVariable("id") long id) {
-		categoriesService.deleteCategories(id);
-		return "redirect:/admin/categories";
-	}
-
-	@PostMapping("/categories/reset")
-	public String ResetCategories() {
-		return "redirect:/admin/categories";
+		Page<Categories> listPage = categoriesService.getAllCategoriesPage(pageNo);
+		Optional<Categories> categ = categoriesService.getCategoriesById(id);
+		model.addAttribute("listService", categoriesService.getAllCategories());
+		model.addAttribute("categEdit", categoriesService.orElse(new Categories()));
+		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("totalPage", listPage.getTotalPages());
+		model.addAttribute("listCategories", listPage);
+		return "page/categorieAdmin";
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.fima.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.fima.entity.Categories;
-import com.fima.entity.Services;
 import com.fima.repository.CategoriesRepository;
 import com.fima.service.CategoriesService;
 
@@ -21,10 +21,7 @@ public class CategoriesServiceImpl implements CategoriesService{
 @Autowired
 CategoriesRepository categoriesRepository;
 
-public List<String> getAllCategoriesByName(){
-	return categoriesRepository.getCategoriesByName();
-  
-}
+
 
 @Override
 public List<Categories> getAllCategories() {
