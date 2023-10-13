@@ -21,7 +21,11 @@ public class CategoriesServiceImpl implements CategoriesService{
 @Autowired
 CategoriesRepository categoriesRepository;
 
-
+@Override
+public List<Categories> searchCategoriesByName(String name) {
+    List<Categories> categoriesList = categoriesRepository.findAllByNameContainingIgnoreCase(name);
+    return categoriesList;
+}
 
 @Override
 public List<Categories> getAllCategories() {

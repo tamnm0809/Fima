@@ -19,7 +19,26 @@
 	rel="stylesheet"
 	integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
 	crossorigin="anonymous" />
-	 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<style type="text/css">
+.button {
+	background-color: rgb(48, 83, 73);
+	color: white;
+}
+
+.item-link1.active {
+	color: white !important;
+}
+
+.item-list1.active {
+	background-color: white;
+}
+
+.item-link1.active:hover {
+	color: white !important;
+}
+</style>
 </head>
 
 <body>
@@ -59,11 +78,13 @@
 						<ul class="item-nav1 accordion-collapse collapse show"
 							id="panelsStayOpen-collapseThree"
 							aria-labelledby="panelsStayOpen-headingThree">
-							<li class="item-list1" style="background-color: #305349"><a
-								href="" class="item-link1 text-light">Quản lí các loại dịch
-									vụ</a></li>
-							<li class="item-list1"><a href="" class="item-link1">Quản
-									lí những dịch vụ đặc thù</a></li>
+							<li class="item-list1"><a th:href="@{/admin/categories}"
+								style="color: #666666" class="item-link1 ">Quản lí các loại
+									dịch vụ</a></li>
+							<li class="item-list1"><a
+								th:href="@{/admin/services/getAllServices}"
+								style="color: #666666" class="item-link1 ">Quản lí những
+									dịch vụ đặc thù</a></li>
 						</ul>
 				</a></li>
 				<li class="item-list"><a href="" class="item-link"> <i
@@ -158,7 +179,7 @@
 								<td>[(${services.prices})]</td>
 								<td>[(${services.descriptions})]</td>
 								<td><a
-									th:href="@{/admin/services/edit(id=${services.id_services})}"
+									th:href="@{/admin/services/edit/{id}(id=${services.id_services})}"
 									role="button"> <i class="fa fa-pencil" aria-hidden="true"></i>
 								</a> <a
 									th:href="@{'/admin/services/delete/' + ${services.id_services}}"
@@ -193,7 +214,7 @@
 	</div>
 
 	<script src="/admin/js/services.js"></script>
-
+	<script type="text/javascript" src="/js/admin.js"></script>
 	<!-- Bootstrap JavaScript Libraries -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"

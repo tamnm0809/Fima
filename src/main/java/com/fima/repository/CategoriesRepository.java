@@ -12,7 +12,8 @@ import com.fima.entity.Categories;
 @Repository
 public interface CategoriesRepository extends JpaRepository<Categories, Long> {
 
-	
-	public List<Categories> findAllByNameContainingIgnoreCase( String name);
-
+	@Query("SELECT c FROM Categories c WHERE TRIM(LOWER(c.name)) LIKE LOWER(CONCAT('%', TRIM(:name), '%'))")
+	public List<Categories> findAllByNameContainingIgnoreCase(@Param("name") String name);
+//	@Query("SELECT c FROM Categories c WHERE LOWER(c.name) LIKE %:name%")
+//    public List<Categories> findAllByNameContainingIgnoreCase(String name);
 }

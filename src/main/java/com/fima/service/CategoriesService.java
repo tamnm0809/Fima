@@ -9,7 +9,7 @@ import com.fima.entity.Categories;
 
 public interface CategoriesService{
 
-public List<Categories> searchCategorie();
+public List<Categories> searchCategoriesByName(String name);
 
 public List<Categories> getAllCategories();
 

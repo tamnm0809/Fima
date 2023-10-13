@@ -42,8 +42,9 @@ public class AdminController {
 		return "page/servicesAdmin";
 	}
 
-	@GetMapping("/services/edit")
-	public String getServicesById(Model model, @RequestParam("id") long id,
+
+	@GetMapping("/services/edit/{id}")
+	public String getServicesById(Model model, @PathVariable("id") long id,
 			@RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo) {
 		Page<Services> listPage = servicesService.getAllServicesPage(pageNo);
 		Optional<Services> service = servicesService.getServicesById(id);
@@ -98,27 +99,84 @@ public class AdminController {
 	}
 
 	// Categories
-	@GetMapping("/services/getAllServices")
-	public String pagecategori(Model model, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo) {
-		Page<Categories> listPage = categoriesService.getAllCategoriesPage(pageNo);
-		model.addAttribute("currentPage", pageNo);
-		model.addAttribute("totalPage", listPage.getTotalPages());
-		model.addAttribute("listcategories", listPage);
-		System.out.println(listPage.getContent());
-		return "page/categorieAdmin";
+	@GetMapping("/categories")
+	public String getAllCategories(Model model, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo) {
+		Page<Categories> page = categoriesService.getAllCategoriesPage(pageNo);
+		model.addAttribute("listCategories", page.getContent());
+		model.addAttribute("currentPageCate", pageNo);
+		model.addAttribute("totalPageCate", page.getTotalPages());
+		return "page/categoriesAdmin";
 	}
 
-	@GetMapping("/services/edit")
-	public String getCategoriesById(Model model, @RequestParam("id") long id,
+	@PostMapping("/categories/add")
+	public String addCategories(@RequestParam("nameCate") String name,
+			@RequestParam("descriptionsCate") String descriptions) {
+		Categories categories = new Categories();
+		categories.setName(name);
+		categories.setDescriptions(descriptions);
+		categoriesService.addCategories(categories);
+		return "redirect:/admin/categories";
+	}
+
+	@GetMapping("/categories/edit/{id}")
+	public String editCategories(@PathVariable("id") Long id, Model model,
 			@RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo) {
-		Page<Categories> listPage = categoriesService.getAllCategoriesPage(pageNo);
-		Optional<Categories> categ = categoriesService.getCategoriesById(id);
-		model.addAttribute("listService", categoriesService.getAllCategories());
-		model.addAttribute("categEdit", categoriesService.orElse(new Categories()));
-		model.addAttribute("currentPage", pageNo);
-		model.addAttribute("totalPage", listPage.getTotalPages());
-		model.addAttribute("listCategories", listPage);
-		return "page/categorieAdmin";
+		Optional<Categories> categories = categoriesService.getCategoriesById(id);
+		if (categories.isPresent()) {
+			model.addAttribute("categoriesEdit", categories.get());
+		}
+		Page<Categories> page = categoriesService.getAllCategoriesPage(pageNo);
+		model.addAttribute("listCategories", page.getContent());
+		model.addAttribute("currentPageCate", pageNo);
+		model.addAttribute("totalPageCate", page.getTotalPages());
+		return "page/categoriesAdmin";
 	}
 
+	@PostMapping("/categories/update")
+	public String updateCategories(@RequestParam("idCate") Long id, @RequestParam("nameCate") String name,
+	        @RequestParam("descriptionsCate") String descriptions) {
+	    Optional<Categories> optionalCategories = categoriesService.getCategoriesById(id);
+	    
+	    if (optionalCategories.isPresent()) {
+	        Categories categories = optionalCategories.get();
+	        categories.setName(name);
+	        categories.setDescriptions(descriptions);
+	        categoriesService.updateCategories(categories);
+	    }  
+	    return "redirect:/admin/categories";
+	}
+	
+	@GetMapping("/categories/delete/{id}") 
+	public String deleteCategories(Model model, @PathVariable("id") long id) {
+		categoriesService.deleteCategories(id);
+		return "redirect:/admin/categories";
+	}
+
+	@PostMapping("/categories/reset")
+	public String ResetCategories() {
+		return "redirect:/admin/categories";
+	}
+
+
+	@PostMapping("/categories/search")
+	public String searchCategories(Model model, @RequestParam("searchName") String searchName, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo) {
+	    Page<Categories> page;
+	    
+	    // Kiểm tra searchName để xác định cần tìm kiếm hoặc lấy tất cả danh mục
+	    if (!searchName.isEmpty()) {
+	        // Thực hiện tìm kiếm theo tên danh mục
+	        List<Categories> searchResult = categoriesService.searchCategoriesByName(searchName);
+	        System.out.println(searchResult);
+	        page = new PageImpl<>(searchResult);
+	        System.out.println(page);
+	    } else {
+	        // Hiển thị tất cả danh mục nếu searchName trống
+	        page = categoriesService.getAllCategoriesPage(pageNo);
+	        return "redirect:/admin/categories";
+	    }	    
+	    model.addAttribute("listCategories", page.getContent());
+	    model.addAttribute("currentPageCate", pageNo);
+	    model.addAttribute("totalPageCate", page.getTotalPages());
+	    return "page/categoriesAdmin";
+	}
 }
