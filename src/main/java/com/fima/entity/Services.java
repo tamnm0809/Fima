@@ -11,36 +11,41 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="services")
+@Table(name = "services")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Services implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_services")
+	@Column(name = "id_services")
 	private Long id_services;
-	
-	@Column(name="name", columnDefinition = "NVARCHAR(100)")
+
+	@NotEmpty
+	@Column(name = "name", columnDefinition = "NVARCHAR(100)")
 	private String name;
-	
-	@Column(name="prices")
+
+	@NotEmpty
+	@Min(value = 50)
+	@Column(name = "prices")
 	private Double prices;
-	
-	@Column(name="descriptions", columnDefinition = "NVARCHAR(500)")
+
+	@Column(name = "descriptions", columnDefinition = "NVARCHAR(500)")
 	private String descriptions;
-	
+
+	@NotEmpty
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_categories")
+	@JoinColumn(name = "id_categories")
 	private Categories categories;
 
 }
