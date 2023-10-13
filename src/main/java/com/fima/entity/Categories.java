@@ -11,6 +11,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,6 +33,8 @@ public class Categories implements Serializable{
 	private Long id_categories;
 	
 	@Column(name="name", columnDefinition = "NVARCHAR(50)")
+	 @NotBlank(message = "Tên không được để trống")
+    @Size(max = 50, message = "Tên không được vượt quá {max} ký tự")
 	private String name;
 	
 	@Column(name="descriptions", columnDefinition = "NVARCHAR(500)")
