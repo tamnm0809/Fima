@@ -1,7 +1,11 @@
 package com.fima.entity;
 
+import java.io.Serial;
 import java.io.Serializable;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -10,9 +14,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,28 +30,38 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Services implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    @Serial
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_services")
-	private Long id_services;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_services")
+    private Long id_services;
 
-	@NotEmpty
-	@Column(name = "name", columnDefinition = "NVARCHAR(100)")
-	private String name;
+    @Column(name = "name", columnDefinition = "NVARCHAR(100)")
+    @Size(min = 4, max = 255, message = "Tên phải có ít nhất 4 kì tự và nhỏ hơn 255 kí tự!")
+    private String name;
 
-	@NotEmpty
-	@Min(value = 50)
-	@Column(name = "prices")
-	private Double prices;
+    @Column(name = "descriptions", columnDefinition = "NVARCHAR(MAX)")
+    @Size(min = 10, message = "Mô tả cần nhập ít nhất 10 kí tự!")
+    private String descriptions;
 
-	@Column(name = "descriptions", columnDefinition = "NVARCHAR(500)")
-	private String descriptions;
+    @Column(name = "date_cre")
+    @NotBlank(message = "Vui lòng nhập ngày tạo dịch vụ này!")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    private String date_cre;
 
-	@NotEmpty
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_categories")
-	private Categories categories;
+    @Column(name = "date_update")
+    @NotNull(message = "Vui lòng chọn ngày!")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private String date_update;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_categories")
+    private Categories categories;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_services")
+    private Prices prices;
 
 }

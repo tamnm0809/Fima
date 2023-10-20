@@ -1,307 +1,323 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-	xmlns="http://www.w3.org/1999/xhtml">
+      xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Overview</title>
-<!-- Required meta tags -->
-<meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
-	integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
-	crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link th:href="@{/css/admin-base.css}" rel="stylesheet" />
-<link th:href="@{/css/admin-index.css}" rel="stylesheet" />
-<!-- Bootstrap CSS v5.2.1 -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-	crossorigin="anonymous" />
+    <title>Overview</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+          integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link th:href="@{/css/admin-base.css}" rel="stylesheet"/>
+    <link th:href="@{/css/admin-index.css}" rel="stylesheet"/>
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+            crossorigin="anonymous"/>
 </head>
 
 <body>
-	<div class="container-fluid d-flex">
-		<div class="dashboard container-fluid"
-			style="width: 20%; border-right: 1px gray">
-			<ul class="item-nav">
-				<li class="item-list text-center"><a href="" class="item-link">
-						<img src="/image/logo-admin.png" alt="" class="img-fluid" />
-				</a></li>
-				<li class="item-list" style="background-color: #305349"><a
-					href="" class="item-link text-light"> <i class="fa fa-home"
-						aria-hidden="true"></i> Trang chủ
-				</a></li>
-				<li class="item-list"><a href=""
-					class="accordion-button collapsed item-link"
-					data-bs-toggle="collapse"
-					data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-					aria-controls="panelsStayOpen-collapseOne"> <i
-						class="fa fa-user" aria-hidden="true"></i> Quản lí tài khoản <i
-						class="fa fa-angle-down" aria-hidden="false"></i>
-						<ul class="item-nav1 accordion-collapse collapse"
-							id="panelsStayOpen-collapseOne"
-							aria-labelledby="panelsStayOpen-headingOne">
-							<li class="item-list1"><a href="" class="item-link1">Quản
-									lí người dùng</a></li>
-							<li class="item-list1"><a href="" class="item-link1">Quản
-									lí đối tác</a></li>
-						</ul>
-				</a></li>
-				<li class="item-list"><a href=""
-					class="accordion-button collapsed item-link"
-					data-bs-toggle="collapse"
-					data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true"
-					aria-controls="panelsStayOpen-collapseTwo"> <i
-						class="fa fa-sticky-note" aria-hidden="true"></i> Quản lí dịch vụ
-						<i class="fa fa-angle-down" aria-hidden="false"></i>
-						<ul class="item-nav1 accordion-collapse collapse"
-							id="panelsStayOpen-collapseTwo"
-							aria-labelledby="panelsStayOpen-headingTwo">
-							<li class="item-list1"><a href="/admin/services/getAllServices" class="item-link1">Quản
-									lí các loại dịch vụ</a></li>
-							<li class="item-list1"><a href="/admin/categories/getAllCategories" class="item-link1">Quản
-									lí những dịch vụ đặc thù</a></li>
-						</ul>
-				</a></li>
-				<li class="item-list"><a href=""
-					class="accordion-button collapsed item-link"
-					data-bs-toggle="collapse"
-					data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true"
-					aria-controls="panelsStayOpen-collapseThree"> <i
-						class="fa fa-bar-chart" aria-hidden="true"></i> Thống kê <i
-						class="fa fa-angle-down" aria-hidden="false"></i>
-						<ul class="item-nav1 accordion-collapse collapse"
-							id="panelsStayOpen-collapseThree"
-							aria-labelledby="panelsStayOpen-headingThree">
-							<li class="item-list1"><a href="" class="item-link1">Thống
-									kê tài khoản</a></li>
-							<li class="item-list1"><a href="" class="item-link1">Thống
-									kê dịch vụ</a></li>
-							<li class="item-list1"><a href="" class="item-link1">Thống
-									kê doanh thu</a></li>
-							<li class="item-list1"><a href="" class="item-link1">Thống
-									kê đơn đặt</a></li>
-						</ul>
-				</a></li>
-				<li class="item-list"><a href="" class="item-link"> <i
-						class="fa fa-exclamation-triangle" aria-hidden="true"></i> Báo cáo
-						sự cố
-				</a></li>
-			</ul>
-		</div>
-		<div class="view container-fluid mx-1" style="width: 80%">
-			<div class="info">
-				<div class="row text-light">akjjdhlkjajkfadskjjdalksdalsdhlas</div>
-				<h2 class="mb-5">Welcome to Fima</h2>
-				<ul>
-					<li><a href=""> <i class="fa fa-user-circle"
-							aria-hidden="true"></i>
-					</a></li>
-					<li><a href=""> <i class="fa fa-cog" aria-hidden="true"></i>
-					</a></li>
-					<li><a href=""> <i class="fa fa-bell" aria-hidden="true"></i>
-					</a></li>
-				</ul>
-			</div>
-			<div class="chart d-flex">
-				<canvas class="w-75 canvas" id="canvas"></canvas>
-				<div class="components px-4">
-					<div class="row">
-						<div class="col col-6 col-lg-6 col-md-6 px-2 py-2">
-							<div class="item" style="background-color: #49d3acc7">
-								<div class="icon">
-									<i class="fa fa-users" aria-hidden="true"></i>
-								</div>
-								<div>Khách hàng mới</div>
-								<div>200.255</div>
-							</div>
-						</div>
-						<div class="col col-6 col-lg-6 col-md-6 px-2 py-2">
-							<div class="item" style="background-color: #ecececaf">
-								<div class="icon">
-									<i class="fa fa-users" aria-hidden="true"></i>
-								</div>
-								<div>Dịch vụ hoàn thành</div>
-								<div>215.458</div>
-							</div>
-						</div>
-						<div class="col col-6 col-lg-6 col-md-6 px-2 py-2">
-							<div class="item" style="background-color: #ecececaf">
-								<div class="icon">
-									<i class="fa fa-users" aria-hidden="true"></i>
-								</div>
-								<div>Đối tác mới</div>
-								<div>200.255</div>
-							</div>
-						</div>
-						<div class="col col-6 col-lg-6 col-md-6 px-2 py-2">
-							<div class="item" style="background-color: #49d3acc7">
-								<div class="icon">
-									<i class="fa fa-users" aria-hidden="true"></i>
-								</div>
-								<div>Dịch vụ bị hủy</div>
-								<div>200.255</div>
-							</div>
-						</div>
-						<div class="col col-6 col-lg-6 col-md-6 px-2 py-2">
-							<div class="item" style="background-color: #49d3acc7">
-								<div class="icon">
-									<i class="fa fa-eye" aria-hidden="true"></i>
-								</div>
-								<div>Lượt truy cập</div>
-								<div>200.255</div>
-							</div>
-						</div>
-						<div class="col col-6 col-lg-6 col-md-6 px-2 py-2">
-							<div class="item" style="background-color: #ecececaf">
-								<div class="icon">
-									<i class="fa fa-star" aria-hidden="true"></i>
-								</div>
-								<div>Đánh giá</div>
-								<div>200.255</div>
-							</div>
-						</div>
-						<div class="col col-12 col-lg-12 col-md-12 pt-3 mt-5"
-							style="background-color: #ecececaf; border-radius: 10px">
-							<h4>Đối tác năng động</h4>
-							<ul class="name-title">
-								<li class="title-mini" style="color: #305349">
-									<h5>
-										<i class="fa fa-user px-2" aria-hidden="true"></i>Nguyễn Văn
-										Công
-									</h5>
-								</li>
-								<li class="title-mini">
-									<h5>></h5>
-								</li>
-								<li class="title-mini"
-									style="font-size: 20px; color: rgb(236, 236, 22)"><i
-									class="fa fa-star" aria-hidden="true"></i> <i
-									class="fa fa-star" aria-hidden="true"></i> <i
-									class="fa fa-star" aria-hidden="true"></i> <i
-									class="fa fa-star" aria-hidden="true"></i> <i
-									class="fa fa-star" aria-hidden="true"></i></li>
-							</ul>
-							<ul class="name-title">
-								<li class="title-mini" style="color: #305349">
-									<h5>
-										<i class="fa fa-user px-2" aria-hidden="true"></i>Nguyễn Văn
-										Công
-									</h5>
-								</li>
-								<li class="title-mini">
-									<h5>></h5>
-								</li>
-								<li class="title-mini"
-									style="font-size: 20px; color: rgb(236, 236, 22)"><i
-									class="fa fa-star" aria-hidden="true"></i> <i
-									class="fa fa-star" aria-hidden="true"></i> <i
-									class="fa fa-star" aria-hidden="true"></i> <i
-									class="fa fa-star" aria-hidden="true"></i> <i
-									class="fa fa-star" aria-hidden="true"></i></li>
-							</ul>
-							<ul class="name-title">
-								<li class="title-mini" style="color: #305349">
-									<h5>
-										<i class="fa fa-user px-2" aria-hidden="true"></i>Nguyễn Văn
-										Công
-									</h5>
-								</li>
-								<li class="title-mini">
-									<h5>></h5>
-								</li>
-								<li class="title-mini"
-									style="font-size: 20px; color: rgb(236, 236, 22)"><i
-									class="fa fa-star" aria-hidden="true"></i> <i
-									class="fa fa-star" aria-hidden="true"></i> <i
-									class="fa fa-star" aria-hidden="true"></i> <i
-									class="fa fa-star" aria-hidden="true"></i> <i
-									class="fa fa-star" aria-hidden="true"></i></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="revenue d-flex mt-5">
-				<div class="details" style="width: 75%;">
-					<div class="card mb-3 fs-5 pe-1">
-						<div class="row g-0">
-							<div class="col-md-4">
-								<img src="/icon/icon4.png" class="img-fluid w-25"
-									alt="..." /> Nước
-							</div>
-							<div class="col-md-4 text-center pt-5">
-								<p class="card-text">6000 VND</p>
-							</div>
-							<div class="col-md-4 text-center pt-5 fw-bold">
-								<p class="card-text" style="color: #305349">+ 16.25%</p>
-							</div>
-						</div>
-					</div>
-					<div class="card mb-3 fs-5 pe-1">
-						<div class="row g-0">
-							<div class="col-md-4">
-								<img src="/icon/icon5.png" class="img-fluid w-25"
-									alt="..." />Điện
-							</div>
-							<div class="col-md-4 text-center pt-5">
-								<p class="card-text">6000 VND</p>
-							</div>
-							<div class="col-md-4 text-center pt-5 fw-bold">
-								<p class="card-text" style="color: #305349">+ 16.25%</p>
-							</div>
-						</div>
-					</div>
-					<div class="card mb-3 fs-5 pe-1">
-						<div class="row g-0">
-							<div class="col-md-4">
-								<img src="/icon/icon6.png" class="img-fluid w-25"
-									alt="..." /> Nhà cửa
-							</div>
-							<div class="col-md-4 text-center pt-5">
-								<p class="card-text">6000 VND</p>
-							</div>
-							<div class="col-md-4 text-center pt-5 fw-bold">
-								<p class="card-text" style="color: #305349">+ 16.25%</p>
-							</div>
-						</div>
-					</div>
-					<div class="card mb-3 fs-5 pe-1">
-						<div class="row g-0">
-							<div class="col-md-4">
-								<img src="/icon/icon7.png" class="img-fluid w-25"
-									alt="..." /> Gia dụng
-							</div>
-							<div class="col-md-4 text-center pt-5">
-								<p class="card-text">6000 VND</p>
-							</div>
-							<div class="col-md-4 text-center pt-5 fw-bold">
-								<p class="card-text" style="color: #305349">+ 16.25%</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="chart p-3" style="width: 25%;">
-					<canvas class="doughnut"></canvas>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="container-fluid d-flex">
+    <div class="dashboard container-fluid" style="width: 20%;">
+        <ul class="item-nav">
+            <li class="item-list text-center"><a href="" class="item-link">
+                <img src="/image/logo-admin.png" alt="" class="img-fluid"/>
+            </a></li>
+            <li class="item-list" style="background-color: #305349"><a
+                    href="" class="item-link text-light"> <i class="fa fa-home"
+                                                             aria-hidden="true"></i> Trang chủ
+            </a></li>
+            <li class="item-list"><a href=""
+                                     class="accordion-button collapsed item-link"
+                                     data-bs-toggle="collapse"
+                                     data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                     aria-controls="panelsStayOpen-collapseOne"> <i
+                    class="fa fa-user" aria-hidden="true"></i> Quản lí tài khoản <i
+                    class="fa fa-angle-down" aria-hidden="false"></i>
+                <ul class="item-nav1 accordion-collapse collapse"
+                    id="panelsStayOpen-collapseOne"
+                    aria-labelledby="panelsStayOpen-headingOne">
+                    <li class="item-list1"><a href="" class="item-link1"><i
+                            class="fa fa-male pe-3" aria-hidden="true"></i>Quản lí người
+                        dùng</a></li>
+                    <li class="item-list1"><a href="" class="item-link1"><i
+                            class="fa fa-universal-access pe-3" aria-hidden="true"></i>Quản
+                        lí đối tác</a></li>
+                </ul>
+            </a></li>
+            <li class="item-list"><a href=""
+                                     class="accordion-button collapsed item-link"
+                                     data-bs-toggle="collapse"
+                                     data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true"
+                                     aria-controls="panelsStayOpen-collapseTwo"> <i
+                    class="fa fa-sticky-note" aria-hidden="true"></i> Quản lí dịch vụ
+                <i class="fa fa-angle-down" aria-hidden="false"></i>
+                <ul class="item-nav1 accordion-collapse collapse"
+                    id="panelsStayOpen-collapseTwo"
+                    aria-labelledby="panelsStayOpen-headingTwo">
+                    <li class="item-list1"><a
+                            href="/admin/services/getAllServices" class="item-link1"><i
+                            class="fa fa-tasks pe-3" aria-hidden="true"></i>Quản lí các
+                        loại dịch vụ</a></li>
+                    <li class="item-list1"><a
+                            href="/admin/categories/getAllCategories" class="item-link1"><i
+                            class="fa fa-folder pe-3" aria-hidden="true"></i>Quản lí những
+                        dịch vụ đặc thù</a></li>
+                    <li class="item-list1"><a
+                            href="/admin/prices/getAllPrices" class="item-link1"><i class="fa fa-university pe-1"
+                                                                                    aria-hidden="true"></i>Quản lí giá
+                        dịch vụ</a></li>
+                </ul>
+            </a></li>
+            <li class="item-list"><a href=""
+                                     class="accordion-button collapsed item-link"
+                                     data-bs-toggle="collapse"
+                                     data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true"
+                                     aria-controls="panelsStayOpen-collapseThree"> <i
+                    class="fa fa-bar-chart" aria-hidden="true"></i> Thống kê <i
+                    class="fa fa-angle-down" aria-hidden="false"></i>
+                <ul class="item-nav1 accordion-collapse collapse"
+                    id="panelsStayOpen-collapseThree"
+                    aria-labelledby="panelsStayOpen-headingThree">
+                    <li class="item-list1"><a href="" class="item-link1"><i
+                            class="fa fa-users pe-3" aria-hidden="true"></i>Thống kê tài
+                        khoản</a></li>
+                    <li class="item-list1"><a href="" class="item-link1"><i
+                            class="fa fa-newspaper-o pe-3" aria-hidden="true"></i>Thống kê
+                        dịch vụ</a></li>
+                    <li class="item-list1"><a href="" class="item-link1"><i
+                            class="fa fa-money pe-3" aria-hidden="true"></i>Thống kê doanh
+                        thu</a></li>
+                    <li class="item-list1"><a href="" class="item-link1"><i
+                            class="fa fa-address-book pe-3" aria-hidden="true"></i>Thống kê
+                        đơn đặt</a></li>
+                </ul>
+            </a></li>
+            <li class="item-list"><a href="" class="item-link"> <i
+                    class="fa fa-exclamation-triangle" aria-hidden="true"></i> Báo cáo
+                sự cố
+            </a></li>
+            <li class="item-list"><a href="" class="item-link"> <i
+                    class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất
+            </a></li>
+        </ul>
+    </div>
+    <div class="view container-fluid mx-1" style="width: 80%">
+        <div class="info">
+            <div class="row text-light">akjjdhlkjajkfadskjjdalksdalsdhlas</div>
+            <h2 class="mb-1">Welcome to Fima</h2>
+            <ul>
+                <li><a href=""> <i class="fa fa-user-circle"
+                                   aria-hidden="true"></i>
+                </a></li>
+                <li><a href=""> <i class="fa fa-cog" aria-hidden="true"></i>
+                </a></li>
+                <li><a href=""> <i class="fa fa-bell" aria-hidden="true"></i>
+                </a></li>
+            </ul>
+        </div>
+        <div class="chart d-flex">
+            <div class="container-fluid">
+                <canvas class="canvas" id="canvas"></canvas>
+                <div class="details mt-5">
+                    <div class="card mb-3 fs-5 pe-1">
+                        <div class="row g-0 p-2">
+                            <div class="col-md-4">
+                                <img src="/icon/icon4.png" class="img-fluid" width="15%"
+                                     alt="..."/> Nước
+                            </div>
+                            <div class="col-md-4 text-center pt-3">
+                                <p class="card-text">6000 VND</p>
+                            </div>
+                            <div class="col-md-4 text-center pt-3 fw-bold">
+                                <p class="card-text" style="color: #305349">+ 16.25%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-3 fs-5 pe-1">
+                        <div class="row g-0 p-2">
+                            <div class="col-md-4">
+                                <img src="/icon/icon5.png" class="img-fluid" width="15%"
+                                     alt="..."/>Điện
+                            </div>
+                            <div class="col-md-4 text-center pt-3">
+                                <p class="card-text">6000 VND</p>
+                            </div>
+                            <div class="col-md-4 text-center pt-3 fw-bold">
+                                <p class="card-text" style="color: #305349">+ 16.25%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-3 fs-5 pe-1">
+                        <div class="row g-0 p-2">
+                            <div class="col-md-4">
+                                <img src="/icon/icon6.png" class="img-fluid" width="15%"
+                                     alt="..."/> Nhà cửa
+                            </div>
+                            <div class="col-md-4 text-center pt-3">
+                                <p class="card-text">6000 VND</p>
+                            </div>
+                            <div class="col-md-4 text-center pt-3 fw-bold">
+                                <p class="card-text" style="color: #305349">+ 16.25%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-3 fs-5 pe-1">
+                        <div class="row g-0 p-2">
+                            <div class="col-md-4">
+                                <img src="/icon/icon7.png" class="img-fluid" width="15%"
+                                     alt="..."/> Gia dụng
+                            </div>
+                            <div class="col-md-4 text-center pt-3">
+                                <p class="card-text">6000 VND</p>
+                            </div>
+                            <div class="col-md-4 text-center pt-3 fw-bold">
+                                <p class="card-text" style="color: #305349">+ 16.25%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="components px-4">
+                <div class="row">
+                    <div class="col col-6 col-lg-6 col-md-6 px-2 py-2">
+                        <div class="item" style="background-color: #49d3acc7">
+                            <div class="icon">
+                                <i class="fa fa-users" aria-hidden="true"></i>
+                            </div>
+                            <div>Khách hàng mới</div>
+                            <div>200.255</div>
+                        </div>
+                    </div>
+                    <div class="col col-6 col-lg-6 col-md-6 px-2 py-2">
+                        <div class="item" style="background-color: #ecececaf">
+                            <div class="icon">
+                                <i class="fa fa-users" aria-hidden="true"></i>
+                            </div>
+                            <div>Dịch vụ hoàn thành</div>
+                            <div>215.458</div>
+                        </div>
+                    </div>
+                    <div class="col col-6 col-lg-6 col-md-6 px-2 py-2">
+                        <div class="item" style="background-color: #ecececaf">
+                            <div class="icon">
+                                <i class="fa fa-users" aria-hidden="true"></i>
+                            </div>
+                            <div>Đối tác mới</div>
+                            <div>200.255</div>
+                        </div>
+                    </div>
+                    <div class="col col-6 col-lg-6 col-md-6 px-2 py-2">
+                        <div class="item" style="background-color: #49d3acc7">
+                            <div class="icon">
+                                <i class="fa fa-users" aria-hidden="true"></i>
+                            </div>
+                            <div>Dịch vụ bị hủy</div>
+                            <div>200.255</div>
+                        </div>
+                    </div>
+                    <div class="col col-6 col-lg-6 col-md-6 px-2 py-2">
+                        <div class="item" style="background-color: #49d3acc7">
+                            <div class="icon">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                            </div>
+                            <div>Lượt truy cập</div>
+                            <div>200.255</div>
+                        </div>
+                    </div>
+                    <div class="col col-6 col-lg-6 col-md-6 px-2 py-2">
+                        <div class="item" style="background-color: #ecececaf">
+                            <div class="icon">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </div>
+                            <div>Đánh giá</div>
+                            <div>200.255</div>
+                        </div>
+                    </div>
+                    <!-- <div class="col col-12 col-lg-12 col-md-12 pt-3 mt-5"
+                        style="background-color: #ecececaf; border-radius: 10px">
+                        <h4>Đối tác năng động</h4>
+                        <ul class="name-title">
+                            <li class="title-mini" style="color: #305349">
+                                <h5>
+                                    <i class="fa fa-user px-2" aria-hidden="true"></i>Nguyễn Văn
+                                    Công
+                                </h5>
+                            </li>
+                            <li class="title-mini">
+                                <h5>></h5>
+                            </li>
+                            <li class="title-mini"
+                                style="font-size: 20px; color: rgb(236, 236, 22)"><i
+                                class="fa fa-star" aria-hidden="true"></i> <i
+                                class="fa fa-star" aria-hidden="true"></i> <i
+                                class="fa fa-star" aria-hidden="true"></i> <i
+                                class="fa fa-star" aria-hidden="true"></i> <i
+                                class="fa fa-star" aria-hidden="true"></i></li>
+                        </ul>
+                        <ul class="name-title">
+                            <li class="title-mini" style="color: #305349">
+                                <h5>
+                                    <i class="fa fa-user px-2" aria-hidden="true"></i>Nguyễn Văn
+                                    Công
+                                </h5>
+                            </li>
+                            <li class="title-mini">
+                                <h5>></h5>
+                            </li>
+                            <li class="title-mini"
+                                style="font-size: 20px; color: rgb(236, 236, 22)"><i
+                                class="fa fa-star" aria-hidden="true"></i> <i
+                                class="fa fa-star" aria-hidden="true"></i> <i
+                                class="fa fa-star" aria-hidden="true"></i> <i
+                                class="fa fa-star" aria-hidden="true"></i> <i
+                                class="fa fa-star" aria-hidden="true"></i></li>
+                        </ul>
+                        <ul class="name-title">
+                            <li class="title-mini" style="color: #305349">
+                                <h5>
+                                    <i class="fa fa-user px-2" aria-hidden="true"></i>Nguyễn Văn
+                                    Công
+                                </h5>
+                            </li>
+                            <li class="title-mini">
+                                <h5>></h5>
+                            </li>
+                            <li class="title-mini"
+                                style="font-size: 20px; color: rgb(236, 236, 22)"><i
+                                class="fa fa-star" aria-hidden="true"></i> <i
+                                class="fa fa-star" aria-hidden="true"></i> <i
+                                class="fa fa-star" aria-hidden="true"></i> <i
+                                class="fa fa-star" aria-hidden="true"></i> <i
+                                class="fa fa-star" aria-hidden="true"></i></li>
+                        </ul>
+                    </div> -->
+                </div>
+                <div class="chart m-3">
+                    <canvas class="doughnut"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <script type="text/javascript" th:src="@{/js/indexAdmin.js}"></script>
-	<!-- Bootstrap JavaScript Libraries -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-		integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-		crossorigin="anonymous"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script type="text/javascript" th:src="@{/js/indexAdmin.js}"></script>
+<!-- Bootstrap JavaScript Libraries -->
+<script
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-		integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
-		crossorigin="anonymous"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+        crossorigin="anonymous"></script>
 </body>
 </html>

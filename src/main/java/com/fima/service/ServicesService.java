@@ -9,16 +9,18 @@ import com.fima.entity.Services;
 
 public interface ServicesService {
 
-	public List<Services> getAllServices();
-	
-	public Page<Services> getAllServicesPage(Integer PageNo);
+    public List<Services> getAllServices();
 
-	public Services addServices(Services services);
-	
-	public void updateServices(Services services);
-	
-	public void deleteServices(long id);
-	
-	public Optional<Services> getServicesById(long id);
+    public Page<Services> getAllServicesPage(Integer PageNo);
+
+    public Services addServices(Services services);
+
+    public void updateServices(Services services);
+
+    public void deleteServices(long id);
+
+    public Optional<Services> getServicesById(long id);
+
+    public List<Services> findByNameLike(String name);
 
 }

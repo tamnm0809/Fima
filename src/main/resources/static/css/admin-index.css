@@ -1,45 +1,52 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap");
 
 :root {
-  --yellow-color: #f4c36c;
-  --green-color: #305349;
-  --white-color: #ffffff;
+    --yellow-color: #f4c36c;
+    --green-color: #305349;
+    --white-color: #ffffff;
 }
+
 * {
-  font-family: "Roboto Condensed";
+    font-family: "Roboto Condensed";
 }
+
 .view .info {
-  display: flex;
-  margin-top: 20px;
-  justify-content: space-between;
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
 }
+
 .view .info ul {
-  list-style: none;
-  display: flex;
+    list-style: none;
+    display: flex;
 }
+
 .view .info ul li a {
-  font-size: 25px;
-  padding: 20px;
-  color: var(--green-color);
+    font-size: 25px;
+    padding: 20px;
+    color: var(--green-color);
 }
+
 .view .chart .components .row .col .item {
-  /* width: 150px; */
-  padding: 20px 10px;
-  border: none;
-  border-radius: 5px;
-  font-size: 18px;
+    padding: 20px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
 }
-.view .chart .components .row .col .item{
+
+.view .chart .components .row .col .item {
     color: var(--green-color);
     font-size: 20px;
 }
+
 .view .chart .components .row .col .name-title {
-  padding: 0;
-  display: flex;
-  justify-content: space-between;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
 }
+
 .view .chart .components .row .col .name-title .title-mini {
-  list-style: none;
-  font-size: 20px;
-  padding: 5px 0px;
+    list-style: none;
+    font-size: 20px;
+    padding: 5px 0px;
 }

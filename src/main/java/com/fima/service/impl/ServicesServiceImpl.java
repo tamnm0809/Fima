@@ -16,41 +16,46 @@ import com.fima.service.ServicesService;
 @Service
 public class ServicesServiceImpl implements ServicesService {
 
-	@Autowired
-	ServicesRepository serviceRepository;
+    @Autowired
+    ServicesRepository serviceRepository;
 
-	@Override
-	public List<Services> getAllServices() {
-		return serviceRepository.findAll();
-	}
+    @Override
+    public List<Services> getAllServices() {
+        return serviceRepository.findAll();
+    }
 
-	@Override
-	public Page<Services> getAllServicesPage(Integer pageNo) {
-		Pageable pageable = PageRequest.of(pageNo - 1, 5);
-		return serviceRepository.findAll(pageable);
-	}
+    @Override
+    public Page<Services> getAllServicesPage(Integer pageNo) {
+        Pageable pageable = PageRequest.of(pageNo - 1, 13);
+        return serviceRepository.findAll(pageable);
+    }
 
-	@Override
-	public Services addServices(Services services) {
-		if (services != null) {
-			return serviceRepository.save(services);
-		}
-		return null;
-	}
+    @Override
+    public Services addServices(Services services) {
+        if (services != null) {
+            return serviceRepository.save(services);
+        }
+        return null;
+    }
 
-	@Override
-	public void updateServices(Services services) {
-		serviceRepository.save(services);
-	}
+    @Override
+    public void updateServices(Services services) {
+        serviceRepository.save(services);
+    }
 
-	@Override
-	public void deleteServices(long id) {
-		serviceRepository.deleteById(id);
-	}
+    @Override
+    public void deleteServices(long id) {
+        serviceRepository.deleteById(id);
+    }
 
-	@Override
-	public Optional<Services> getServicesById(long id) {
-		return serviceRepository.findById(id);
-	}
+    @Override
+    public Optional<Services> getServicesById(long id) {
+        return serviceRepository.findById(id);
+    }
+
+    @Override
+    public List<Services> findByNameLike(String name) {
+        return serviceRepository.findAllByNameLike(name);
+    }
 
 }

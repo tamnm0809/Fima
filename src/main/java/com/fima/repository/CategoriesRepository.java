@@ -12,4 +12,6 @@ import com.fima.entity.Categories;
 @Repository
 public interface CategoriesRepository extends JpaRepository<Categories, Long> {
 
+	@Query(value = "SELECT * FROM CATEGORIES WHERE NAME LIKE %:keyword%", nativeQuery = true)
+	public List<Categories> findAllByName(@Param("keyword") String keyword);
 }

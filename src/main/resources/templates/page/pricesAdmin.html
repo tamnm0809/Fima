@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Management Prices</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+          integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link th:href="@{/css/admin-base.css}" rel="stylesheet"/>
+    <link th:href="@{/css/admin-category.css}" rel="stylesheet"/>
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+            crossorigin="anonymous"/>
+</head>
+
+<body>
+<div class="container-fluid d-flex">
+    <div class="dashboard container-fluid px-3" style="width: 20%;">
+        <ul class="item-nav">
+            <li class="item-list text-center"><a href="/admin/"
+                                                 class="item-link"> <img src="/image/logo-admin.png" alt=""
+                                                                         class="img-fluid"/>
+            </a></li>
+            <li class="item-list"><a href="/admin/" class="item-link">
+                <i class="fa fa-home" aria-hidden="true"></i> Trang chủ
+            </a></li>
+            <li class="item-list"><a href=""
+                                     class="accordion-button collapsed item-link"
+                                     data-bs-toggle="collapse"
+                                     data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                     aria-controls="panelsStayOpen-collapseOne"> <i
+                    class="fa fa-user" aria-hidden="true"></i> Quản lí tài khoản <i
+                    class="fa fa-angle-down" aria-hidden="false"></i>
+                <ul class="item-nav1 accordion-collapse collapse"
+                    id="panelsStayOpen-collapseOne"
+                    aria-labelledby="panelsStayOpen-headingOne">
+                    <li class="item-list1"><a href="" class="item-link1"><i
+                            class="fa fa-male pe-1" aria-hidden="true"></i>Quản lí người
+                        dùng</a></li>
+                    <li class="item-list1"><a href="" class="item-link1"><i
+                            class="fa fa-universal-access pe-1" aria-hidden="true"></i>Quản
+                        lí đối tác</a></li>
+                </ul>
+            </a></li>
+            <li class="item-list"><a href=""
+                                     class="accordion-button collapsed item-link"
+                                     data-bs-toggle="collapse"
+                                     data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true"
+                                     aria-controls="panelsStayOpen-collapseTwo"> <i
+                    class="fa fa-sticky-note" aria-hidden="true"></i> Quản lí dịch vụ
+                <i class="fa fa-angle-down" aria-hidden="false"></i>
+                <ul class="item-nav1 accordion-collapse collapse show"
+                    id="panelsStayOpen-collapseTwo"
+                    aria-labelledby="panelsStayOpen-headingTwo">
+                    <li class="item-list1"><a
+                            href="/admin/services/getAllServices" class="item-link1"><i
+                            class="fa fa-tasks pe-1" aria-hidden="true"></i>Quản lí các
+                        loại dịch vụ</a></li>
+                    <li class="item-list1"><a
+                            href="/admin/categories/getAllCategories" class="item-link1"><i
+                            class="fa fa-folder pe-1" aria-hidden="true"></i>Quản lí những
+                        dịch vụ đặc thù</a></li>
+                    <li class="item-list1" style="background-color: #305349"><a
+                            href="/admin/prices/getAllPrices" class="item-link1 text-light"><i
+                            class="fa fa-university pe-1" aria-hidden="true"></i>Quản lí giá dịch vụ</a></li>
+                </ul>
+            </a></li>
+            <li class="item-list"><a href=""
+                                     class="accordion-button collapsed item-link"
+                                     data-bs-toggle="collapse"
+                                     data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true"
+                                     aria-controls="panelsStayOpen-collapseThree"> <i
+                    class="fa fa-bar-chart" aria-hidden="true"></i> Thống kê <i
+                    class="fa fa-angle-down" aria-hidden="false"></i>
+                <ul class="item-nav1 accordion-collapse collapse"
+                    id="panelsStayOpen-collapseThree"
+                    aria-labelledby="panelsStayOpen-headingThree">
+                    <li class="item-list1"><a href="" class="item-link1"><i
+                            class="fa fa-users pe-1" aria-hidden="true"></i>Thống kê tài
+                        khoản</a></li>
+                    <li class="item-list1"><a href="" class="item-link1"><i
+                            class="fa fa-newspaper-o pe-1" aria-hidden="true"></i>Thống kê
+                        dịch vụ</a></li>
+                    <li class="item-list1"><a href="" class="item-link1"><i
+                            class="fa fa-money pe-1" aria-hidden="true"></i>Thống kê doanh
+                        thu</a></li>
+                    <li class="item-list1"><a href="" class="item-link1"><i
+                            class="fa fa-address-book pe-1" aria-hidden="true"></i>Thống kê
+                        đơn đặt</a></li>
+                </ul>
+            </a></li>
+            <li class="item-list"><a href="" class="item-link"> <i
+                    class="fa fa-exclamation-triangle" aria-hidden="true"></i> Báo cáo
+                sự cố
+            </a></li>
+            <li class="item-list"><a href="" class="item-link"> <i
+                    class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất
+            </a></li>
+        </ul>
+    </div>
+    <div class="view container-fluid ps-2 mx-1" style="width: 80%;">
+        <div class="info">
+            <div class="row text-light">akjjdhlkjajkfadskjjdalksdalsdhlas</div>
+            <h2 class="mb-2">Quản lý giá những dịch vụ</h2>
+            <ul>
+                <li><a href=""> <i class="fa fa-user-circle"
+                                   aria-hidden="true"></i>
+                </a></li>
+                <li><a href=""> <i class="fa fa-cog" aria-hidden="true"></i>
+                </a></li>
+                <li><a href=""> <i class="fa fa-bell" aria-hidden="true"></i>
+                </a></li>
+            </ul>
+        </div>
+        <form th:action="@{/admin/prices/search}" method="post">
+            <div class="search-input w-75 d-flex justify-content-end" style="margin: 0 auto;">
+                <div class="w-25">
+                    <div class="input-group">
+                        <span class="input-group-text bg-light" style="border-right: none">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </span>
+                        <input type="text" name="keyword" style="border-left: none" class="form-control"
+                               placeholder="Nhập giá bạn muốn tìm.."/>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <form th:action="@{/admin/prices/search}" method="post"
+              th:object="${pricesEdit}" class="form" style="margin: 0 auto">
+            <div class="w-75" style="margin: 0 auto">
+                <div class="mb-3" hidden>
+                    <label class="form-label">Mã</label>
+                    <input type="text" class="form-control" name="id" readonly
+                           th:field="*{id_prices}"
+                           th:value="${pricesEdit?.id_prices}"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Tên dịch vụ</label>
+                    <select class="form-select" th:field="*{services.id_services}">
+                        <option th:each="price : ${list}"
+                                th:value="${price.services.id_services}">
+                            <pre th:text="${price.services.name}"/>
+                        </option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Giá</label>
+                    <input type="text" class="form-control" name="prices"
+                           placeholder="Giá dịch vụ..."
+                           th:field="*{prices}"
+                           th:value="${pricesEdit?.prices}"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Thời gian áp dụng</label>
+                    <input type="text" class="form-control" name="time_apply"
+                           placeholder="Thời gian áp dụng..."
+                           th:field="*{time_apply}"
+                           th:value="${pricesEdit?.time_apply}"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Ngày tạo (yyyy/mm/dd)</label> <input
+                        class="form-control" name="date_cre" th:field="*{date_cre}"
+                        th:value="${pricesEdit?.date_cre}" type="date"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Ngày chỉnh sửa (yyyy/mm/dd)</label> <input
+                        class="form-control" name="date_update" th:field="*{date_update}"
+                        th:value="${pricesEdit?.date_update}" type="date" readonly/>
+                </div>
+                <div class="button-group text-center">
+                    <button class="btn" formaction="/admin/prices/add">
+                        <i class="fa fa-plus pe-3" aria-hidden="true"></i>Thêm
+                    </button>
+                    <button class="btn" formaction="/admin/prices/update">
+                        <i class="fa fa-wrench pe-3" aria-hidden="true"></i>Cập nhật
+                    </button>
+                    <button class="btn" formaction="/admin/prices/reset">
+                        <i class="fa fa-refresh pe-3" aria-hidden="true"></i>Làm mới
+                    </button>
+                </div>
+            </div>
+            <div class="tables pt-5">
+                <table class="table">
+                    <thead class="text-center">
+                    <tr>
+                        <th scope="col">Mã</th>
+                        <th scope="col">Tên dịch vụ</th>
+                        <th scope="col">Giá</th>
+                        <th scope="col">Thời gian áp dụng</th>
+                        <th scope="col">Ngày tạo</th>
+                        <th scope="col">Ngày cập nhật</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-center">
+                    <tr th:each="prices : ${listPrices}">
+                        <th scope="row">[(${prices.id_prices})]</th>
+                        <td>[(${prices.services.name})]</td>
+                        <td>[(${prices.prices})]</td>
+                        <td>[(${prices.time_apply})]</td>
+                        <td>[(${prices.date_cre})]</td>
+                        <td>[(${prices.date_update})]</td>
+                        <td><a
+                                th:href="@{'/admin/prices/edit/' + ${prices.id_prices}}"
+                                role="button"> <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a> <a
+                                th:href="@{'/admin/prices/delete/' + ${prices.id_prices}}"
+                                role="button"> <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+        <div class="buttons_ text-center">
+            <nav aria-label="Page navigation example">
+					<span th:text="${currentPage}+' of '+${totalPage}"
+                          style="font-size: 18px"></span>
+                <ul class="pagination">
+                    <li class="page-item" th:if="${currentPage > 1}"><a
+                            class="page-link" th:href="@{'?pageNo='+${firstPage}}"
+                            aria-label="Previous"> <span aria-hidden="true"> <i
+                            class="fa fa-angle-double-left" aria-hidden="true"></i>
+							</span>
+                    </a></li>
+                    <li class="page-item" th:if="${currentPage > 1}"><a
+                            class="page-link" th:href="@{'?pageNo='+${currentPage - 1}}"
+                            aria-label="Previous"> <span aria-hidden="true"> <i
+                            class="fa fa-angle-left" aria-hidden="true"></i>
+							</span>
+                    </a></li>
+                    <li class="page-item"
+                        th:each="i:${#numbers.sequence(1,totalPage)}"
+                        th:classappend="${currentPage == i ? 'active' : ''}"><a
+                            class="page-link" th:href="@{'?pageNo='+${i}}" th:text="${i}"></a></li>
+                    <li class="page-item" th:if="${currentPage < totalPage}"><a
+                            class="page-link" th:href="@{'?pageNo='+${currentPage + 1}}"
+                            aria-label="Next"> <span aria-hidden="true"><i
+                            class="fa fa-angle-right" aria-hidden="true"></i></span>
+                    </a></li>
+                    <li class="page-item" th:if="${currentPage < totalPage}"><a
+                            class="page-link" th:href="@{'?pageNo='+${totalPage}}"
+                            aria-label="Next"> <span aria-hidden="true"><i
+                            class="fa fa-angle-double-right" aria-hidden="true"></i></span>
+                    </a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JavaScript Libraries -->
+<script
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+        crossorigin="anonymous"></script>
+</body>
+</html>
