@@ -11,7 +11,6 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: "Roboto Condensed";
 }
 
 .view .info {
@@ -46,10 +45,6 @@
 
 .view .search-input .input-group .btn i {
     color: var(--orange-color);
-}
-
-.view {
-    height: 100%;
 }
 
 .view .form .form-control {

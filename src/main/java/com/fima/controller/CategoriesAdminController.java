@@ -1,6 +1,7 @@
 package com.fima.controller;
 
 import com.fima.entity.Categories;
+import com.fima.entity.Services;
 import com.fima.service.CategoriesService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,11 @@ public class CategoriesAdminController {
         Page<Categories> listPage = categoriesService.getAllCategoryPage(pageNo);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");// Format date
         Date date = new Date(); // Get date current
-        if (bindingResult.hasErrors()) {
+        if ((bindingResult.hasErrors()
+                || categoriesService.findByName(categories.getName()) != null)
+                || categoriesService.findByDescriptions(categories.getDescriptions()) != null) {
+            String message = "Bạn chưa điền đầy đủ thông tin hoặc trùng lặp tên, mô tả trên biểu mẫu!";
+            model.addAttribute("message", message);
             model.addAttribute("currentPage", pageNo);
             model.addAttribute("firstPage", pageNo = 1);
             model.addAttribute("totalPage", listPage.getTotalPages());
@@ -73,7 +78,11 @@ public class CategoriesAdminController {
         Page<Categories> listPage = categoriesService.getAllCategoryPage(pageNo);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");// Format date
         Date date = new Date(); // Get date current
-        if (bindingResult.hasErrors()) {
+        if ((bindingResult.hasErrors()
+                || categoriesService.findByName(categories.getName()) != null)
+                || categoriesService.findByDescriptions(categories.getDescriptions()) != null) {
+            String message = "Bạn chưa điền đầy đủ thông tin hoặc trùng lặp tên, mô tả trên biểu mẫu!";
+            model.addAttribute("message", message);
             model.addAttribute("currentPage", pageNo);
             model.addAttribute("firstPage", pageNo = 1);
             model.addAttribute("totalPage", listPage.getTotalPages());
@@ -88,9 +97,7 @@ public class CategoriesAdminController {
     }
 
     @RequestMapping("/categories/reset")
-    public String deleteCategory(Model model, @ModelAttribute("servicesDetails") Categories categories) {
-        categories = null;
-        model.addAttribute("listCategory", categoriesService.getAllCategory());
+    public String deleteCategory(Model model, @ModelAttribute("categoriesEdit") Categories categories) {
         return "redirect:/admin/categories/getAllCategories";
     }
 
@@ -102,26 +109,20 @@ public class CategoriesAdminController {
         return "redirect:/admin/categories/getAllCategories";
     }
 
-    @PostMapping("/categories/search")
-    public String searchCategories(Model model, @RequestParam("keyword") String searchName,
-                                   @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo) {
+    @RequestMapping(value = "/categories/search", method = {RequestMethod.GET, RequestMethod.POST})
+    public String searchServices(Model model, @RequestParam(value = "keyword", required = false) String keyword,
+                                 @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo) {
         Page<Categories> page;
-        if (!searchName.isEmpty()) {
-            List<Categories> searchResult = categoriesService.searchCategoryByName(searchName);
-            page = new PageImpl<>(searchResult);
-            model.addAttribute("listCategory", page.getContent());
-            model.addAttribute("currentPage", pageNo);
-            model.addAttribute("totalPage", page.getTotalPages());
+        if (keyword != null && !keyword.isEmpty()) {
+            page = categoriesService.searchCategoryByName(keyword, pageNo);
+            model.addAttribute("keyword", keyword);
         } else {
             page = categoriesService.getAllCategoryPage(pageNo);
         }
         model.addAttribute("listCategory", page.getContent());
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPage", page.getTotalPages());
-        Categories categoriesEdit = new Categories();
-        model.addAttribute("categoriesEdit", categoriesEdit);
+        model.addAttribute("categoriesEdit", new Categories());
         return "page/categoryAdmin";
     }
-
-
 }

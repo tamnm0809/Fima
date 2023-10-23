@@ -5,25 +5,18 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import com.fima.entity.Prices;
-import com.fima.service.PricesServices;
+import com.fima.service.FileUploadService;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.fima.entity.Categories;
 import com.fima.entity.Services;
-import com.fima.service.CategoriesService;
 import com.fima.service.ServicesService;
 
 import jakarta.validation.Valid;
@@ -34,6 +27,9 @@ public class ServicesAdminController {
 
     @Autowired
     public ServicesService servicesService;
+
+    @Autowired
+    public FileUploadService fileUploadService;
 
     @GetMapping("/")
     public String index() {
@@ -65,20 +61,26 @@ public class ServicesAdminController {
         return "page/servicesAdmin";
     }
 
+    @SneakyThrows
     @RequestMapping("/services/add")
     public String addServices(@Valid @ModelAttribute("servicesEdit") Services service, BindingResult bindingResult,
                               @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo, Model model) {
         Page<Services> listPage = servicesService.getAllServicesPage(pageNo);
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");// Format date
-        Date date = new Date(); // Get date current
-        if (bindingResult.hasErrors()) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        Date date = new Date();
+        if ((bindingResult.hasErrors())
+                || (servicesService.findByName(service.getName()) != null)
+                || (servicesService.findByDescriptions(service.getDescriptions()) != null)) {
+            String message = "Bạn chưa điền đầy đủ thông tin hoặc trùng lặp tên, mô tả trên biểu mẫu!";
+            model.addAttribute("message", message);
             model.addAttribute("currentPage", pageNo);
             model.addAttribute("firstPage", pageNo = 1);
             model.addAttribute("totalPage", listPage.getTotalPages());
             model.addAttribute("listService", listPage);
             return "page/servicesAdmin";
         }
-        service.setDate_update(formatter.format(date));// Set date_update by date current
+        service.setImage("");
+        service.setDate_update(formatter.format(date));
         servicesService.addServices(service);
         return "redirect:/admin/services/getAllServices";
     }
@@ -89,7 +91,11 @@ public class ServicesAdminController {
         Page<Services> listPage = servicesService.getAllServicesPage(pageNo);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");// Format date
         Date date = new Date(); // Get date current
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()
+                || (servicesService.findByName(service.getName()) != null)
+                || (servicesService.findByDescriptions(service.getDescriptions()) != null)) {
+            String message = "Bạn chưa điền đầy đủ thông tin hoặc trùng lặp tên, mô tả trên biểu mẫu!";
+            model.addAttribute("message", message);
             model.addAttribute("currentPage", pageNo);
             model.addAttribute("firstPage", pageNo = 1);
             model.addAttribute("totalPage", listPage.getTotalPages());
@@ -99,6 +105,7 @@ public class ServicesAdminController {
         if ((service.getDate_update() != null)) {
             service.setDate_update(formatter.format(date));// Set date_update by date current
         }
+        service.setImage("");
         servicesService.updateServices(service);
         return "redirect:/admin/services/getAllServices";
     }
@@ -106,7 +113,6 @@ public class ServicesAdminController {
     @RequestMapping("/services/reset")
     public String deleteServices(Model model, @ModelAttribute("servicesDetails") Services service) {
         service = null;
-        model.addAttribute("listService", servicesService.getAllServices());
         return "redirect:/admin/services/getAllServices";
     }
 
@@ -118,25 +124,20 @@ public class ServicesAdminController {
         return "redirect:/admin/services/getAllServices";
     }
 
-    @PostMapping("/services/search")
-    public String searchServices(Model model, @RequestParam("keyword") String keyword,
+    @RequestMapping(value = "/services/search", method = {RequestMethod.GET, RequestMethod.POST})
+    public String searchServices(Model model, @RequestParam(value = "keyword", required = false) String keyword,
                                  @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo) {
         Page<Services> page;
-        if (!keyword.isEmpty()) {
-            List<Services> searchResult = servicesService.findByNameLike(keyword);
-            page = new PageImpl(searchResult);
-            System.out.println(page);
-            model.addAttribute("listService", page.getContent());
-            model.addAttribute("currentPage", pageNo);
-            model.addAttribute("totalPage", page.getTotalPages());
+        if (keyword != null && !keyword.isEmpty()) {
+            page = servicesService.findByNameLike(keyword, pageNo);
+            model.addAttribute("keyword", keyword);
         } else {
             page = servicesService.getAllServicesPage(pageNo);
         }
         model.addAttribute("listService", page.getContent());
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPage", page.getTotalPages());
-        Services servicesEdit = new Services();
-        model.addAttribute("servicesEdit", servicesEdit);
+        model.addAttribute("servicesEdit", new Services());
         return "page/servicesAdmin";
     }
 }

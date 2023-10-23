@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 
 import com.fima.entity.Services;
+import org.springframework.data.domain.Pageable;
 
 public interface ServicesService {
 
@@ -21,6 +22,10 @@ public interface ServicesService {
 
     public Optional<Services> getServicesById(long id);
 
-    public List<Services> findByNameLike(String name);
+    public Page<Services> findByNameLike(String name, int pageNo);
+
+    public Services findByName(String name);
+
+    public Services findByDescriptions(String descriptions);
 
 }

@@ -3,6 +3,7 @@ package com.fima.service.impl;
 import java.util.List;
 import java.util.Optional;
 
+import com.fima.entity.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,7 +27,7 @@ public class CategoriesServiceImpl implements CategoriesService {
 
     @Override
     public Page<Categories> getAllCategoryPage(Integer pageNo) {
-        Pageable pageable = PageRequest.of(pageNo - 1, 3);
+        Pageable pageable = PageRequest.of(pageNo - 1, 13);
         return categoriesRepository.findAll(pageable);
     }
 
@@ -54,7 +55,19 @@ public class CategoriesServiceImpl implements CategoriesService {
     }
 
     @Override
-    public List<Categories> searchCategoryByName(String keyword) {
-        return categoriesRepository.findAllByName(keyword);
+    public Page<Categories> searchCategoryByName(String keyword, Integer pageNo) {
+        Pageable pageable = PageRequest.of(pageNo - 1, 13);
+        Page<Categories> listPage = categoriesRepository.findAllByName(keyword, pageable);
+        return listPage;
+    }
+
+    @Override
+    public Categories findByName(String name) {
+        return categoriesRepository.findByName(name);
+    }
+
+    @Override
+    public Categories findByDescriptions(String descriptions) {
+        return categoriesRepository.findByDescriptions(descriptions);
     }
 }

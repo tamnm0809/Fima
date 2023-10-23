@@ -3,6 +3,7 @@ package com.fima.entity;
 import java.io.Serial;
 import java.io.Serializable;
 
+import jakarta.validation.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.CascadeType;
@@ -39,14 +40,21 @@ public class Services implements Serializable {
     private Long id_services;
 
     @Column(name = "name", columnDefinition = "NVARCHAR(100)")
-    @Size(min = 4, max = 255, message = "Tên phải có ít nhất 4 kì tự và nhỏ hơn 255 kí tự!")
+    @Size(min = 4, max = 100, message = "Tên phải có ít nhất 4 kì tự và nhỏ hơn 255 kí tự!")
     private String name;
 
+    @Column(name = "prices")
+    private Double prices;
+
     @Column(name = "descriptions", columnDefinition = "NVARCHAR(MAX)")
-    @Size(min = 10, message = "Mô tả cần nhập ít nhất 10 kí tự!")
+    @Size(min = 10, max = 255, message = "Mô tả cần nhập ít nhất 10 kí tự!")
     private String descriptions;
 
+    @Column(name = "image")
+    private String image;
+
     @Column(name = "date_cre")
+    @NotNull()
     @NotBlank(message = "Vui lòng nhập ngày tạo dịch vụ này!")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private String date_cre;
@@ -59,9 +67,5 @@ public class Services implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categories")
     private Categories categories;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_services")
-    private Prices prices;
 
 }

@@ -66,10 +66,6 @@
                     <li class="item-list1" style="background-color: #305349"><a
                             href="" class="item-link1 text-light"><i
                             class="fa fa-folder pe-1" aria-hidden="true"></i>Quản lí loại dịch vụ</a></li>
-                    <li class="item-list1"><a
-                            href="/admin/prices/getAllPrices" class="item-link1"><i class="fa fa-university pe-1"
-                                                                                    aria-hidden="true"></i>Quản lí giá
-                        dịch vụ</a></li>
                 </ul>
             </a></li>
             <li class="item-list"><a href=""
@@ -200,6 +196,7 @@
                 <div class="mb-3">
                     <h3 class="" style="color: #878A99">Form quản lí</h3>
                 </div>
+                <div class="alert alert-warning" role="alert" th:text="${message}" th:if="${message}"></div>
                 <div class="mb-3" hidden>
                     <label class="form-label">Mã loại dịch vụ</label> <input
                         type="text" class="form-control" name="id" readonly

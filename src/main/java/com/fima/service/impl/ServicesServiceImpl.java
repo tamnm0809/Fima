@@ -54,8 +54,20 @@ public class ServicesServiceImpl implements ServicesService {
     }
 
     @Override
-    public List<Services> findByNameLike(String name) {
-        return serviceRepository.findAllByNameLike(name);
+    public Page<Services> findByNameLike(String name, int pageNo) {
+        Pageable pageable = PageRequest.of(pageNo - 1, 13);
+        Page<Services> listPage = serviceRepository.findAllByNameLike(name, pageable);
+        return listPage;
+    }
+
+    @Override
+    public Services findByName(String name) {
+        return serviceRepository.findByName(name);
+    }
+
+    @Override
+    public Services findByDescriptions(String descriptions) {
+        return serviceRepository.findByDescriptions(descriptions);
     }
 
 }
