@@ -12,10 +12,6 @@
     font-family: "Roboto Condensed", sans-serif;
 }
 
-.container-fluid {
-    height: 100vh;
-}
-
 .dashboard {
     border-radius: 0 10px 10px 0;
     background-color: var(--white-color);
@@ -33,7 +29,7 @@
 }
 
 .dashboard .item-nav .item-list .item-link {
-    font-size: 17px;
+    font-size: 16px;
     color: var(--green-color);
     text-decoration: none;
 }
@@ -46,8 +42,7 @@
 
 .dashboard .item-nav1 .item-list1 {
     list-style: none;
-    padding: 20px 10px;
-    margin: 5px 0 0 0;
+    padding: 20px 0px;
     border-radius: 10px;
 }
 

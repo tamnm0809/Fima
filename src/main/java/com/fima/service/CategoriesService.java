@@ -1,12 +1,10 @@
 package com.fima.service;
 
-import java.util.List;
-import java.util.Optional;
-
-import com.fima.entity.Services;
+import com.fima.entity.Categories;
 import org.springframework.data.domain.Page;
 
-import com.fima.entity.Categories;
+import java.util.List;
+import java.util.Optional;
 
 public interface CategoriesService {
 
@@ -25,6 +23,4 @@ public interface CategoriesService {
     public Page<Categories> searchCategoryByName(String keyword, Integer pageNo);
 
     public Categories findByName(String name);
-
-    public Categories findByDescriptions(String descriptions);
 }

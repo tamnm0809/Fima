@@ -6,25 +6,23 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @SpringBootApplication
 public class FimaApplication {
-
-    private final String CLOUD_NAME = "dbyjvd1i4";
-
-    private final String API_KEY = "924518564742149";
-
-    private final String API_SECRECT = "***************************";
-
     public static void main(String[] args) {
         SpringApplication.run(FimaApplication.class, args);
     }
 
     @Bean
     public Cloudinary cloudinary() {
-        return new Cloudinary(ObjectUtils.asMap(
-                "cloud_name", CLOUD_NAME,
-                "api_key", API_KEY,
-                "api_secret", API_SECRECT));
+        Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+                "cloud_name", "dbyjvd1i4",
+                "api_key", "924518564742149",
+                "api_secret", "mm5Yezxlah-MvtpiNPxwaWrSdps",
+                "secure", true
+        ));
+        return cloudinary;
     }
-
 }

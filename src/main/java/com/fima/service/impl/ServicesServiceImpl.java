@@ -1,17 +1,16 @@
 package com.fima.service.impl;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.fima.entity.Services;
+import com.fima.repository.ServicesRepository;
+import com.fima.service.ServicesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.fima.entity.Services;
-import com.fima.repository.ServicesRepository;
-import com.fima.service.ServicesService;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServicesServiceImpl implements ServicesService {
@@ -63,11 +62,6 @@ public class ServicesServiceImpl implements ServicesService {
     @Override
     public Services findByName(String name) {
         return serviceRepository.findByName(name);
-    }
-
-    @Override
-    public Services findByDescriptions(String descriptions) {
-        return serviceRepository.findByDescriptions(descriptions);
     }
 
 }

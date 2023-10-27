@@ -1,18 +1,16 @@
 package com.fima.service.impl;
 
-import java.util.List;
-import java.util.Optional;
-
-import com.fima.entity.Services;
+import com.fima.entity.Categories;
+import com.fima.repository.CategoriesRepository;
+import com.fima.service.CategoriesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.fima.entity.Categories;
-import com.fima.repository.CategoriesRepository;
-import com.fima.service.CategoriesService;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoriesServiceImpl implements CategoriesService {
@@ -64,10 +62,5 @@ public class CategoriesServiceImpl implements CategoriesService {
     @Override
     public Categories findByName(String name) {
         return categoriesRepository.findByName(name);
-    }
-
-    @Override
-    public Categories findByDescriptions(String descriptions) {
-        return categoriesRepository.findByDescriptions(descriptions);
     }
 }

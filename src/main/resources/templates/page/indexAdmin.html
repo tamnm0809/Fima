@@ -23,7 +23,7 @@
 
 <body>
 <div class="container-fluid d-flex">
-    <div class="dashboard container-fluid" style="width: 20%;">
+    <div class="dashboard container-fluid p-0" style="width: 15%;">
         <ul class="item-nav">
             <li class="item-list text-center"><a href="" class="item-link">
                 <img src="/image/logo-admin.png" alt="" class="img-fluid"/>
@@ -42,10 +42,10 @@
                 <ul class="item-nav1 accordion-collapse collapse"
                     id="panelsStayOpen-collapseOne"
                     aria-labelledby="panelsStayOpen-headingOne">
-                    <li class="item-list1"><a href="" class="item-link1"><i
+                    <li class="item-list1"><a href="/admin/users/getAllUsers" class="item-link1"><i
                             class="fa fa-male pe-3" aria-hidden="true"></i>Quản lí người
                         dùng</a></li>
-                    <li class="item-list1"><a href="" class="item-link1"><i
+                    <li class="item-list1"><a href="/admin/staff/getAllStaff" class="item-link1"><i
                             class="fa fa-universal-access pe-3" aria-hidden="true"></i>Quản
                         lí đối tác</a></li>
                 </ul>
@@ -62,12 +62,10 @@
                     aria-labelledby="panelsStayOpen-headingTwo">
                     <li class="item-list1"><a
                             href="/admin/services/getAllServices" class="item-link1"><i
-                            class="fa fa-tasks pe-3" aria-hidden="true"></i>Quản lí các
-                        loại dịch vụ</a></li>
+                            class="fa fa-tasks pe-3" aria-hidden="true"></i>Quản lí dịch vụ</a></li>
                     <li class="item-list1"><a
                             href="/admin/categories/getAllCategories" class="item-link1"><i
-                            class="fa fa-folder pe-3" aria-hidden="true"></i>Quản lí những
-                        dịch vụ đặc thù</a></li>
+                            class="fa fa-folder pe-3" aria-hidden="true"></i>Quản lí loại dịch vụ</a></li>
                 </ul>
             </a></li>
             <li class="item-list"><a href=""
@@ -103,11 +101,22 @@
             </a></li>
         </ul>
     </div>
-    <div class="view container-fluid mx-1" style="width: 80%">
-        <div class="info">
-            <div class="row text-light">akjjdhlkjajkfadskjjdalksdalsdhlas</div>
-            <h2 class="mb-1">Welcome to Fima</h2>
-            <ul>
+    <div class="view container-fluid mx-1" style="width: 85%;background-color: #F2F1F9;">
+        <div class="info py-1 mt-1 mb-2" style="background-color: #FFFFFF; border-radius: 10px">
+            <form th:action="@{/admin/services/search}" method="post">
+                <div class="search-input">
+                    <div class="w-100 mx-3 my-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="keyword"
+                                   placeholder="Nhập dịch vụ bạn muốn tìm.."/>
+                            <button class="btn btn-primary" type="submit" formaction="/admin/services/search">
+                                <i class="fa fa-search pe-2" aria-hidden="true"></i>Tìm kiếm
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <ul class="mx-3 my-2">
                 <li><a href=""> <i class="fa fa-user-circle"
                                    aria-hidden="true"></i>
                 </a></li>
@@ -117,7 +126,7 @@
                 </a></li>
             </ul>
         </div>
-        <div class="chart d-flex">
+        <div class="chart d-flex" style="background-color: #FFFFFF">
             <div class="container-fluid">
                 <canvas class="canvas" id="canvas"></canvas>
                 <div class="details mt-5">

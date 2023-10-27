@@ -1,25 +1,20 @@
 package com.fima.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-
-import com.fima.service.FileUploadService;
-import lombok.SneakyThrows;
+import com.fima.entity.Services;
+import com.fima.service.CategoriesService;
+import com.fima.service.ServicesService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.fima.entity.Services;
-import com.fima.service.ServicesService;
-
-import jakarta.validation.Valid;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin")
@@ -29,12 +24,7 @@ public class ServicesAdminController {
     public ServicesService servicesService;
 
     @Autowired
-    public FileUploadService fileUploadService;
-
-    @GetMapping("/")
-    public String index() {
-        return "page/indexAdmin";
-    }
+    private CategoriesService categoriesService;
 
     @GetMapping("/services/getAllServices")
     public String pageServices(Model model, @ModelAttribute("servicesEdit") Services services,
@@ -44,6 +34,7 @@ public class ServicesAdminController {
         model.addAttribute("firstPage", pageNo = 1);
         model.addAttribute("totalPage", listPage.getTotalPages());
         model.addAttribute("listService", listPage);
+        model.addAttribute("listCategory", categoriesService.getAllCategory());
         return "page/servicesAdmin";
     }
 
@@ -52,16 +43,15 @@ public class ServicesAdminController {
                                   @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo) {
         Page<Services> listPage = servicesService.getAllServicesPage(pageNo);
         Optional<Services> service = servicesService.getServicesById(id);
-        model.addAttribute("listService", servicesService.getAllServices());
         model.addAttribute("servicesEdit", service.orElse(new Services()));
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("firstPage", pageNo = 1);
         model.addAttribute("totalPage", listPage.getTotalPages());
         model.addAttribute("listService", listPage);
+        model.addAttribute("listCategory", categoriesService.getAllCategory());
         return "page/servicesAdmin";
     }
 
-    @SneakyThrows
     @RequestMapping("/services/add")
     public String addServices(@Valid @ModelAttribute("servicesEdit") Services service, BindingResult bindingResult,
                               @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo, Model model) {
@@ -69,9 +59,8 @@ public class ServicesAdminController {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
         if ((bindingResult.hasErrors())
-                || (servicesService.findByName(service.getName()) != null)
-                || (servicesService.findByDescriptions(service.getDescriptions()) != null)) {
-            String message = "Bạn chưa điền đầy đủ thông tin hoặc trùng lặp tên, mô tả trên biểu mẫu!";
+                || (servicesService.findByName(service.getName()) != null)) {
+            String message = "Bạn chưa điền đầy đủ thông tin hoặc trùng lặp tên trên biểu mẫu!";
             model.addAttribute("message", message);
             model.addAttribute("currentPage", pageNo);
             model.addAttribute("firstPage", pageNo = 1);
@@ -91,11 +80,7 @@ public class ServicesAdminController {
         Page<Services> listPage = servicesService.getAllServicesPage(pageNo);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");// Format date
         Date date = new Date(); // Get date current
-        if (bindingResult.hasErrors()
-                || (servicesService.findByName(service.getName()) != null)
-                || (servicesService.findByDescriptions(service.getDescriptions()) != null)) {
-            String message = "Bạn chưa điền đầy đủ thông tin hoặc trùng lặp tên, mô tả trên biểu mẫu!";
-            model.addAttribute("message", message);
+        if (bindingResult.hasErrors()) {
             model.addAttribute("currentPage", pageNo);
             model.addAttribute("firstPage", pageNo = 1);
             model.addAttribute("totalPage", listPage.getTotalPages());
@@ -112,7 +97,7 @@ public class ServicesAdminController {
 
     @RequestMapping("/services/reset")
     public String deleteServices(Model model, @ModelAttribute("servicesDetails") Services service) {
-        service = null;
+        service.setImage("");
         return "redirect:/admin/services/getAllServices";
     }
 

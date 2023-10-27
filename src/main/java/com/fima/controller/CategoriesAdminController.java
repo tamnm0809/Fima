@@ -1,12 +1,10 @@
 package com.fima.controller;
 
 import com.fima.entity.Categories;
-import com.fima.entity.Services;
 import com.fima.service.CategoriesService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -56,9 +54,8 @@ public class CategoriesAdminController {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");// Format date
         Date date = new Date(); // Get date current
         if ((bindingResult.hasErrors()
-                || categoriesService.findByName(categories.getName()) != null)
-                || categoriesService.findByDescriptions(categories.getDescriptions()) != null) {
-            String message = "Bạn chưa điền đầy đủ thông tin hoặc trùng lặp tên, mô tả trên biểu mẫu!";
+                || categoriesService.findByName(categories.getName()) != null)) {
+            String message = "Bạn chưa điền đầy đủ thông tin hoặc trùng lặp tên trên biểu mẫu!";
             model.addAttribute("message", message);
             model.addAttribute("currentPage", pageNo);
             model.addAttribute("firstPage", pageNo = 1);
@@ -79,9 +76,8 @@ public class CategoriesAdminController {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");// Format date
         Date date = new Date(); // Get date current
         if ((bindingResult.hasErrors()
-                || categoriesService.findByName(categories.getName()) != null)
-                || categoriesService.findByDescriptions(categories.getDescriptions()) != null) {
-            String message = "Bạn chưa điền đầy đủ thông tin hoặc trùng lặp tên, mô tả trên biểu mẫu!";
+                || categoriesService.findByName(categories.getName()) != null)) {
+            String message = "Bạn chưa điền đầy đủ thông tin hoặc trùng lặp tên trên biểu mẫu!";
             model.addAttribute("message", message);
             model.addAttribute("currentPage", pageNo);
             model.addAttribute("firstPage", pageNo = 1);
